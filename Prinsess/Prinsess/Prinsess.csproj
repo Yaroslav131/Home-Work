@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Field\Field.csproj" />
+    <ProjectReference Include="..\GameFunction\GameFunction.csproj" />
+    <ProjectReference Include="..\Hero\Hero.csproj" />
+    <ProjectReference Include="..\LineOutput\LineOutput.csproj" />
+    <ProjectReference Include="..\Mins\Mins.csproj" />
+    <ProjectReference Include="..\Values\Values.csproj" />
+  </ItemGroup>
+
+</Project>
