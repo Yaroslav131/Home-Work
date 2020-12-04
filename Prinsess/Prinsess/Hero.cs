@@ -12,52 +12,52 @@ namespace PersonHero
                 case ConsoleKey.NumPad2:
                 case ConsoleKey.DownArrow:
                 case ConsoleKey.S:
-                    if (Values.Oy == Values.maxGameCoulum)
+                    if (Values.Oy == Values.MaxGameCoulum)
                     {
                         break;
                     }
                     else
                     {
-                        Values.Oy += Values.heroStep;
+                        Values.Oy += Values.HeroStep;
                     }
                     break;
 
                 case ConsoleKey.NumPad6:
                 case ConsoleKey.RightArrow:
                 case ConsoleKey.D:
-                    if (Values.Ox == Values.maxGameRow)
+                    if (Values.Ox == Values.MaxGameRow)
                     {
                         break;
                     }
                     else
                     {
-                        Values.Ox += Values.heroStep;
+                        Values.Ox += Values.HeroStep;
                     }
                     break;
 
                 case ConsoleKey.NumPad8:
                 case ConsoleKey.UpArrow:
                 case ConsoleKey.W:
-                    if (Values.Oy == Values.minGameCoulum)
+                    if (Values.Oy == Values.MinGameCoulum)
                     {
                         break;
                     }
                     else
                     {
-                        Values.Oy -= Values.heroStep;
+                        Values.Oy -= Values.HeroStep;
                     }
                     break;
 
                 case ConsoleKey.NumPad4:
                 case ConsoleKey.LeftArrow:
                 case ConsoleKey.A:
-                    if (Values.Ox == Values.minGameRow)
+                    if (Values.Ox == Values.MinGameRow)
                     {
                         break;
                     }
                     else
                     {
-                        Values.Ox -= Values.heroStep;
+                        Values.Ox -= Values.HeroStep;
                     }
                     break;
             }

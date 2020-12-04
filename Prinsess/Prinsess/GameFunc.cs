@@ -11,6 +11,7 @@ namespace GameFunctions
             Thread.Sleep(2000);
 
             Clear();
+
             do
             {
                 WriteLine("Do you want start new game? Enter/Escape ");
@@ -36,10 +37,11 @@ namespace GameFunctions
                 }
             } while (Values.UnknownKey);
         }
+
         public void Reset()
         {
-            Values.Ox = Values.minGameRow;
-            Values.Oy = Values.minGameCoulum;
+            Values.Ox = Values.MinGameRow;
+            Values.Oy = Values.MinGameCoulum;
             Values.HitPoint = 10;
             Values.ExitGameСycle = true;
             Values.ExitGame = false;

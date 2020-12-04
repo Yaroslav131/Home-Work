@@ -2,7 +2,7 @@
 using System;
 namespace Trap
 {
-    public class MineTrap
+    public class Mine
     {
         Random random = new Random();
         public int Damage { get; set; }
@@ -11,26 +11,26 @@ namespace Trap
         public int MinePossitionOx { get; set; }
         public int MinePossitionOy { get; set; }
 
-        public MineTrap()
+        public Mine()
         {
-            Damage = random.Next(Values.minDamage, Values.maxDamage);
-            Mines = new string[Values.maxGameRow, Values.maxGameCoulum];
+            Damage = random.Next(Values.MinDamage, Values.MaxDamage);
+            Mines = new string[Values.MaxGameRow, Values.MaxGameCoulum];
         }
 
         public void CreateMinField()
         { 
             for (Values.FirstCounter = 0; Values.FirstCounter < Values.MinsNumbers; Values.FirstCounter++)
             {
-                MinePossitionOx = random.Next(Values.minGameRow, Values.maxGameRow);
-                MinePossitionOy = random.Next(Values.minGameCoulum, Values.maxGameCoulum);
+                MinePossitionOx = random.Next(Values.MinGameRow, Values.MaxGameRow);
+                MinePossitionOy = random.Next(Values.MinGameCoulum, Values.MaxGameCoulum);
 
                 if (Mines[MinePossitionOx, MinePossitionOy] == null)
                 {
-                    if (MinePossitionOx != Values.prinsessPossitionOx && MinePossitionOy != Values.prinsessPossitionOy)
+                    if (MinePossitionOx != Values.PrinsessPossitionOx && MinePossitionOy != Values.PrinsessPossitionOy)
                     {
-                        if (MinePossitionOx != Values.heroStartOx && MinePossitionOy != Values.heroStartOy)
+                        if (MinePossitionOx != Values.HeroStartOx && MinePossitionOy != Values.HeroStartOy)
                         {
-                            Mines[MinePossitionOx, MinePossitionOy] = Values.heroAvatar;
+                            Mines[MinePossitionOx, MinePossitionOy] = Values.HeroAvatar;
                         }
                     }   
                 }

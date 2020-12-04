@@ -7,26 +7,26 @@ namespace GameField
 
         public Field()
         {
-            TotalField = new string[Values.maxFieldRow, Values.maxFieldCoulum];
+            TotalField = new string[Values.MaxFieldRow, Values.MaxFieldCoulum];
         }
 
         public void CreateField()
         {
-            for (Values.FirstCounter = 0; Values.FirstCounter < Values.maxFieldRow; Values.FirstCounter++)
+            for (Values.FirstCounter = 0; Values.FirstCounter < Values.MaxFieldRow; Values.FirstCounter++)
             {
-                TotalField[0, Values.FirstCounter] = Values.horizontaFieldlBorder;
-                TotalField[Values.maxFieldRow - 1, Values.FirstCounter] = Values.horizontaFieldlBorder;
+                TotalField[0, Values.FirstCounter] = Values.HorizontaFieldlBorder;
+                TotalField[Values.MaxFieldRow - 1, Values.FirstCounter] = Values.HorizontaFieldlBorder;
             }
-            for (Values.FirstCounter = 1; Values.FirstCounter < Values.maxFieldCoulum - 1; Values.FirstCounter++)
+            for (Values.FirstCounter = 1; Values.FirstCounter < Values.MaxFieldCoulum - 1; Values.FirstCounter++)
             {
-                TotalField[Values.FirstCounter, 0] = Values.verticalFieldBorder;
-                TotalField[Values.FirstCounter, Values.maxFieldCoulum - 1] = Values.verticalFieldBorder;
+                TotalField[Values.FirstCounter, 0] = Values.VerticalFieldBorder;
+                TotalField[Values.FirstCounter, Values.MaxFieldCoulum - 1] = Values.VerticalFieldBorder;
             }
-            for (Values.FirstCounter = 1; Values.FirstCounter < Values.maxFieldRow - 1; Values.FirstCounter++)
+            for (Values.FirstCounter = 1; Values.FirstCounter < Values.MaxFieldRow - 1; Values.FirstCounter++)
             {
-                for (Values.SecondCounter = 1; Values.SecondCounter < Values.maxFieldCoulum - 1; Values.SecondCounter++)
+                for (Values.SecondCounter = 1; Values.SecondCounter < Values.MaxFieldCoulum - 1; Values.SecondCounter++)
                 {
-                    TotalField[Values.FirstCounter, Values.SecondCounter] = Values.fieldCell;
+                    TotalField[Values.FirstCounter, Values.SecondCounter] = Values.FieldCell;
                 }
             }
         }
