@@ -10,7 +10,7 @@ namespace GameField
             TotalField = new string[Values.maxFieldRow, Values.maxFieldCoulum];
         }
 
-        public void CreatField()
+        public void CreateField()
         {
             for (Values.FirstCounter = 0; Values.FirstCounter < Values.maxFieldRow; Values.FirstCounter++)
             {

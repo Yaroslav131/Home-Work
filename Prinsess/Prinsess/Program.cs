@@ -23,7 +23,7 @@ namespace Princess
 
                 gameFunction.Reset();
 
-                gameField.CreatField();
+                gameField.CreateField();
 
                 mineTrape.CreateMinField();
 
