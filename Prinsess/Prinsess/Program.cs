@@ -1,10 +1,17 @@
 ﻿using GameField;
+using FieldValues;
+
 using GameFunctions;
 using GameValues;
-using LineOutput;
+
+using Mines;
+using MineValues;
 using PersonHero;
-using Trap;
+using HeroValues;
+using PrinsesValues;
+using LineOutput;
 using static System.Console;
+
 namespace Princess
 {
     public class Program
@@ -25,7 +32,7 @@ namespace Princess
 
                 gameField.CreateField();
 
-                mine.CreateMinField();
+                mine.CreateMinesField();
 
                 output.ShowTutorial();
 
@@ -36,52 +43,52 @@ namespace Princess
 
                     Clear();
 
-                    gameField.TotalField[Values.Oy, Values.Ox] = Values.HeroAvatar;
+                    gameField.TotalField[HeroValue.Oy, HeroValue.Ox] = HeroValue.HeroAvatar;
 
-                    if (Values.HeroAvatar == mine.Mines[Values.Oy, Values.Ox])
+                    if (HeroValue.HeroAvatar == mine.Mines[HeroValue.Oy, HeroValue.Ox])
                     {
-                        gameField.TotalField[Values.Oy, Values.Ox] = Values.MineAvatar;
+                        gameField.TotalField[HeroValue.Oy, HeroValue.Ox] = MineValue.MineAvatar;
                     }
 
-                    gameField.TotalField[Values.PrinsessPossitionOx, Values.PrinsessPossitionOy] = Values.PrinsessAvatar;
+                    gameField.TotalField[PrinsesValue.PrinsessPossitionOx, PrinsesValue.PrinsessPossitionOy] = PrinsesValue.PrinsessAvatar;
 
                     WriteLine("Princess game");
-                    WriteLine($"Your HP {Values.HitPoint}");
+                    WriteLine($"Your HP {HeroValue.HitPoint}");
 
-                    for (Values.FirstCounter = 0; Values.FirstCounter < Values.MaxFieldRow; Values.FirstCounter++)
+                    for (GameValue.FirstCounter = 0; GameValue.FirstCounter < FieldValue.MaxFieldRow; GameValue.FirstCounter++)
                     {
-                        for (Values.SecondCounter = 0; Values.SecondCounter < Values.MaxFieldCoulum; Values.SecondCounter++)
+                        for (GameValue.SecondCounter = 0; GameValue.SecondCounter < FieldValue.MaxFieldCoulum; GameValue.SecondCounter++)
                         {
-                            Write($"{  gameField.TotalField[Values.FirstCounter, Values.SecondCounter] }\t");
+                            Write($"{  gameField.TotalField[GameValue.FirstCounter, GameValue.SecondCounter] }\t");
                         }
                         WriteLine();
                         WriteLine();
                     }
-                    if (gameField.TotalField[Values.Oy, Values.Ox] == gameField.TotalField[Values.PrinsessPossitionOx, Values.PrinsessPossitionOy])
+                    if (gameField.TotalField[HeroValue.Oy, HeroValue.Ox] == gameField.TotalField[PrinsesValue.PrinsessPossitionOx, PrinsesValue.PrinsessPossitionOy])
                     {
                         WriteLine("EEEEE Princess is safe!!! ");
 
                         gameFunction.EndCodition();
                     }
-                    else if (Values.HeroAvatar == mine.Mines[Values.Oy, Values.Ox])
+                    else if (HeroValue.HeroAvatar == mine.Mines[HeroValue.Oy, HeroValue.Ox])
                     {
-                        mine.Mines[Values.Oy, Values.Ox] = Values.MineAvatar;
-                        Values.HitPoint -= mine.Damage;
+                        mine.Mines[HeroValue.Oy, HeroValue.Ox] = MineValue.MineAvatar;
+                        HeroValue.HitPoint -= mine.Damage;
 
-                        if (Values.HitPoint <= 0)
+                        if (HeroValue.HitPoint <= 0)
                         {
                             WriteLine("GAME OVER");
 
                             gameFunction.EndCodition();
                         }
                     }
-                    if (gameField.TotalField[Values.Oy, Values.Ox] != Values.MineAvatar)
+                    if (gameField.TotalField[HeroValue.Oy, HeroValue.Ox] != MineValue.MineAvatar)
                     {
-                        gameField.TotalField[Values.Oy, Values.Ox] = Values.FieldCell;
+                        gameField.TotalField[HeroValue.Oy, HeroValue.Ox] = FieldValue.FieldCell;
                     }
-                } while (Values.ExitGameСycle);
+                } while (GameValue.ExitGameСycle);
 
-            } while (Values.ExitGame);
+            } while (GameValue.ExitGame);
         }
     }
 }

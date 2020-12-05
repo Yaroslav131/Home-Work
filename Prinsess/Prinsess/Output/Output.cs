@@ -1,4 +1,5 @@
 ﻿using static System.Console;
+
 namespace LineOutput
 {
     public class Output
