@@ -10,13 +10,12 @@ namespace Mines
     {
         Random random = new Random();
 
-        public const string MineAvatar = "¤";
-        public static int MinsNumbers { get; set; } = 10;
+        public const string MineAvatar = "¤";       
         public const int MaxDamage = 10;
         public const int MinDamage = 1;
+        public static int MinsNumbers { get; set; } = 10;
         public int Damage { get; set; }
         public string[,] Mines { get; set; }
-
         public int MinePossitionOx { get; set; }
         public int MinePossitionOy { get; set; }
 
