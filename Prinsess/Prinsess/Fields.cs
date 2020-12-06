@@ -1,18 +1,13 @@
-﻿using GameFunctions;
-
-namespace GameField
+﻿namespace GameField
 {
     public class Field
     {
         public const int MaxFieldCoulum = 12;
         public const int MaxFieldRow = 12;
-
         public const int MaxGameCoulum = 11;
         public const int MaxGameRow = 11;
-
         public const int MinGameCoulum = 1;
         public const int MinGameRow = 1;
-
         public const string HorizontaFieldlBorder = "_";
         public const string VerticalFieldBorder = "|";
         public const string FieldCell = "♠";
@@ -25,21 +20,21 @@ namespace GameField
 
         public void CreateField()
         {
-            for (GameFunction.FirstCounter = 0; GameFunction.FirstCounter < MaxFieldRow; GameFunction.FirstCounter++)
+            for (int FirstCounter = 0; FirstCounter < MaxFieldRow; FirstCounter++)
             {
-                TotalField[0, GameFunction.FirstCounter] = HorizontaFieldlBorder;
-                TotalField[MaxFieldRow - 1, GameFunction.FirstCounter] = HorizontaFieldlBorder;
+                TotalField[0, FirstCounter] = HorizontaFieldlBorder;
+                TotalField[MaxFieldRow - 1, FirstCounter] = HorizontaFieldlBorder;
             }
-            for (GameFunction.FirstCounter = 1; GameFunction.FirstCounter < MaxFieldCoulum - 1; GameFunction.FirstCounter++)
+            for (int FirstCounter = 1; FirstCounter < MaxFieldCoulum - 1; FirstCounter++)
             {
-                TotalField[GameFunction.FirstCounter, 0] = VerticalFieldBorder;
-                TotalField[GameFunction.FirstCounter, MaxFieldCoulum - 1] = VerticalFieldBorder;
+                TotalField[FirstCounter, 0] = VerticalFieldBorder;
+                TotalField[FirstCounter, MaxFieldCoulum - 1] = VerticalFieldBorder;
             }
-            for (GameFunction.FirstCounter = 1; GameFunction.FirstCounter < MaxFieldRow - 1; GameFunction.FirstCounter++)
+            for (int FirstCounter = 1; FirstCounter < MaxFieldRow - 1; FirstCounter++)
             {
-                for (GameFunction.SecondCounter = 1; GameFunction.SecondCounter < MaxFieldCoulum - 1; GameFunction.SecondCounter++)
+                for (int SecondCounter = 1; SecondCounter < MaxFieldCoulum - 1; SecondCounter++)
                 {
-                    TotalField[GameFunction.FirstCounter, GameFunction.SecondCounter] = FieldCell;
+                    TotalField[FirstCounter, SecondCounter] = FieldCell;
                 }
             }
         }

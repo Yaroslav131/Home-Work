@@ -10,10 +10,10 @@ namespace Mines
     {
         Random random = new Random();
 
-        public const string MineAvatar = "¤";       
+        public const string MineAvatar = "¤";
         public const int MaxDamage = 10;
         public const int MinDamage = 1;
-        public static int MinsNumbers { get; set; } = 10;
+        public int MinsNumbers { get; set; }
         public int Damage { get; set; }
         public string[,] Mines { get; set; }
         public int MinePossitionOx { get; set; }
@@ -23,11 +23,12 @@ namespace Mines
         {
             Damage = random.Next(MinDamage, MaxDamage);
             Mines = new string[Field.MaxGameRow, Field.MaxGameCoulum];
+            MinsNumbers = 10;
         }
 
         public void CreateMinesField()
         {
-            for (GameFunction.FirstCounter = 0; GameFunction.FirstCounter < MinsNumbers; GameFunction.FirstCounter++)
+            for (int FirstCounter = 0; FirstCounter < MinsNumbers; FirstCounter++)
             {
                 MinePossitionOx = random.Next(Field.MinGameRow, Field.MaxGameRow);
                 MinePossitionOy = random.Next(Field.MinGameCoulum, Field.MaxGameCoulum);

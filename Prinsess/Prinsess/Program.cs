@@ -49,11 +49,11 @@ namespace Princess
                     WriteLine("Princess game");
                     WriteLine($"Your HP {Hero.HitPoint}");
 
-                    for (GameFunction.FirstCounter = 0; GameFunction.FirstCounter < Field.MaxFieldRow; GameFunction.FirstCounter++)
+                    for (int FirstCounter = 0; FirstCounter < Field.MaxFieldRow; FirstCounter++)
                     {
-                        for (GameFunction.SecondCounter = 0; GameFunction.SecondCounter < Field.MaxFieldCoulum; GameFunction.SecondCounter++)
+                        for ( int SecondCounter = 0; SecondCounter < Field.MaxFieldCoulum; SecondCounter++)
                         {
-                            Write($"{  gameField.TotalField[GameFunction.FirstCounter, GameFunction.SecondCounter] }\t");
+                            Write($"{  gameField.TotalField[FirstCounter, SecondCounter] }\t");
                         }
                         WriteLine();
                         WriteLine();

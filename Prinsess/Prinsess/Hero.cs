@@ -10,9 +10,16 @@ namespace PersonHero
         public const int HeroStep = 1;
         public const int HeroStartOx = 1;
         public const int HeroStartOy = 1;
-        public static int HitPoint { get; set; } = 10;
-        public static int Ox { get; set; } = HeroStartOx;
-        public static int Oy { get; set; } = HeroStartOy;
+        public static int HitPoint { get; set; }
+        public static int Ox { get; set; }
+        public static int Oy { get; set; }
+
+        public Hero()
+        {
+            Ox = HeroStartOx;
+            Oy = HeroStartOy;
+            HitPoint = 10;
+        }
 
         public void MoveHero()
         {
