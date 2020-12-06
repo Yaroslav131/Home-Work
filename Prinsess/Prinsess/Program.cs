@@ -10,10 +10,10 @@ namespace Princess
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Field gameField = new Field();
-            GameFunction gameFunction = new GameFunction();
+            Game game = new Game();
             Hero hero = new Hero();
             Mine mine = new Mine();
             Output output = new Output();
@@ -22,7 +22,7 @@ namespace Princess
             {
                 Clear();
 
-                gameFunction.Reset();
+                game.ResetGame();
 
                 gameField.CreateField();
 
@@ -31,17 +31,18 @@ namespace Princess
                 output.ShowTutorial();
 
                 WriteLine("Press keyboard to start");
+
                 do
                 {
                     hero.MoveHero();
 
                     Clear();
 
-                    gameField.TotalField[Hero.Oy, Hero.Ox] = Hero.HeroAvatar;
+                    gameField.TotalField[Hero.Y, Hero.X] = Hero.HeroAvatar;
 
-                    if (Hero.HeroAvatar == mine.Mines[Hero.Oy, Hero.Ox])
+                    if (Hero.HeroAvatar == mine.Mines[Hero.Y, Hero.X])
                     {
-                        gameField.TotalField[Hero.Oy, Hero.Ox] = Mine.MineAvatar;
+                        gameField.TotalField[Hero.Y, Hero.X] = Mine.MineAvatar;
                     }
 
                     gameField.TotalField[Prinses.PrinsessPossitionOx, Prinses.PrinsessPossitionOy] = Prinses.PrinsessAvatar;
@@ -51,38 +52,41 @@ namespace Princess
 
                     for (int FirstCounter = 0; FirstCounter < Field.MaxFieldRow; FirstCounter++)
                     {
-                        for ( int SecondCounter = 0; SecondCounter < Field.MaxFieldCoulum; SecondCounter++)
+                        for (int SecondCounter = 0; SecondCounter < Field.MaxFieldCoulum; SecondCounter++)
                         {
                             Write($"{  gameField.TotalField[FirstCounter, SecondCounter] }\t");
                         }
                         WriteLine();
                         WriteLine();
                     }
-                    if (gameField.TotalField[Hero.Oy, Hero.Ox] == gameField.TotalField[Prinses.PrinsessPossitionOx, Prinses.PrinsessPossitionOy])
+
+                    if (gameField.TotalField[Hero.Y, Hero.X] == gameField.TotalField[Prinses.PrinsessPossitionOx, Prinses.PrinsessPossitionOy])
                     {
                         WriteLine("EEEEE Princess is safe!!! ");
 
-                        gameFunction.EndCodition();
+                        game.SelectionAction();
                     }
-                    else if (Hero.HeroAvatar == mine.Mines[Hero.Oy, Hero.Ox])
+                    else if (Hero.HeroAvatar == mine.Mines[Hero.Y, Hero.X])
                     {
-                        mine.Mines[Hero.Oy, Hero.Ox] = Mine.MineAvatar;
+                        mine.Mines[Hero.Y, Hero.X] = Mine.MineAvatar;
                         Hero.HitPoint -= mine.Damage;
 
                         if (Hero.HitPoint <= 0)
                         {
                             WriteLine("GAME OVER");
 
-                            gameFunction.EndCodition();
+                            game.SelectionAction();
                         }
                     }
-                    if (gameField.TotalField[Hero.Oy, Hero.Ox] != Mine.MineAvatar)
-                    {
-                        gameField.TotalField[Hero.Oy, Hero.Ox] = Field.FieldCell;
-                    }
-                } while (GameFunction.ExitGameСycle);
 
-            } while (GameFunction.ExitGame);
+                    if (gameField.TotalField[Hero.Y, Hero.X] != Mine.MineAvatar)
+                    {
+                        gameField.TotalField[Hero.Y, Hero.X] = Field.FieldCell;
+                    }
+                }
+                while (Game.ExitGameСycle);
+            }
+            while (Game.ExitGame);
         }
     }
 }

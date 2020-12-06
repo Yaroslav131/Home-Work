@@ -5,13 +5,13 @@ using static System.Console;
 
 namespace GameFunctions
 {
-    public class GameFunction
+    public class Game
     {
         public static bool UnknownKey { get; set; }
         public static bool ExitGameСycle { get; set; }
         public static bool ExitGame { get; set; }
 
-        public void EndCodition()
+        public void SelectionAction()
         {
             do
             {
@@ -40,10 +40,10 @@ namespace GameFunctions
             while (UnknownKey);
         }
 
-        public void Reset()
+        public void ResetGame()
         {
-            Hero.Ox = Field.MinGameRow;
-            Hero.Oy = Field.MinGameCoulum;
+            Hero.X = Field.MinGameRow;
+            Hero.Y = Field.MinGameCoulum;
             Hero.HitPoint = 10;
             ExitGameСycle = true;
             ExitGame = false;

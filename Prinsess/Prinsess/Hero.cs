@@ -11,13 +11,13 @@ namespace PersonHero
         public const int HeroStartOx = 1;
         public const int HeroStartOy = 1;
         public static int HitPoint { get; set; }
-        public static int Ox { get; set; }
-        public static int Oy { get; set; }
+        public static int X { get; set; }
+        public static int Y { get; set; }
 
         public Hero()
         {
-            Ox = HeroStartOx;
-            Oy = HeroStartOy;
+            X = HeroStartOx;
+            Y = HeroStartOy;
             HitPoint = 10;
         }
 
@@ -28,52 +28,52 @@ namespace PersonHero
                 case ConsoleKey.NumPad2:
                 case ConsoleKey.DownArrow:
                 case ConsoleKey.S:
-                    if (Oy == Field.MaxGameCoulum)
+                    if (Y == Field.MaxGameCoulum)
                     {
                         break;
                     }
                     else
                     {
-                        Oy += HeroStep;
+                        Y += HeroStep;
                     }
                     break;
 
                 case ConsoleKey.NumPad6:
                 case ConsoleKey.RightArrow:
                 case ConsoleKey.D:
-                    if (Ox == Field.MaxGameRow)
+                    if (X == Field.MaxGameRow)
                     {
                         break;
                     }
                     else
                     {
-                        Ox += HeroStep;
+                        X += HeroStep;
                     }
                     break;
 
                 case ConsoleKey.NumPad8:
                 case ConsoleKey.UpArrow:
                 case ConsoleKey.W:
-                    if (Oy == Field.MinGameCoulum)
+                    if (Y == Field.MinGameCoulum)
                     {
                         break;
                     }
                     else
                     {
-                        Oy -= HeroStep;
+                        Y -= HeroStep;
                     }
                     break;
 
                 case ConsoleKey.NumPad4:
                 case ConsoleKey.LeftArrow:
                 case ConsoleKey.A:
-                    if (Ox == Field.MinGameRow)
+                    if (X == Field.MinGameRow)
                     {
                         break;
                     }
                     else
                     {
-                        Ox -= HeroStep;
+                        X -= HeroStep;
                     }
                     break;
             }
