@@ -1,6 +1,6 @@
 ﻿namespace PrinsesValues
 {
-    public static class PrinsesValue
+    public static class Prinses
     {
         public const string PrinsessAvatar = "P";
         public const int PrinsessPossitionOx = 10;

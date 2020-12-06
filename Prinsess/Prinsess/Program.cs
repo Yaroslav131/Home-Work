@@ -1,15 +1,9 @@
 ﻿using GameField;
-using FieldValues;
-
 using GameFunctions;
-using GameValues;
-
-using Mines;
-using MineValues;
-using PersonHero;
-using HeroValues;
-using PrinsesValues;
 using LineOutput;
+using Mines;
+using PersonHero;
+using PrinsesValues;
 using static System.Console;
 
 namespace Princess
@@ -43,52 +37,52 @@ namespace Princess
 
                     Clear();
 
-                    gameField.TotalField[HeroValue.Oy, HeroValue.Ox] = HeroValue.HeroAvatar;
+                    gameField.TotalField[Hero.Oy, Hero.Ox] = Hero.HeroAvatar;
 
-                    if (HeroValue.HeroAvatar == mine.Mines[HeroValue.Oy, HeroValue.Ox])
+                    if (Hero.HeroAvatar == mine.Mines[Hero.Oy, Hero.Ox])
                     {
-                        gameField.TotalField[HeroValue.Oy, HeroValue.Ox] = MineValue.MineAvatar;
+                        gameField.TotalField[Hero.Oy, Hero.Ox] = Mine.MineAvatar;
                     }
 
-                    gameField.TotalField[PrinsesValue.PrinsessPossitionOx, PrinsesValue.PrinsessPossitionOy] = PrinsesValue.PrinsessAvatar;
+                    gameField.TotalField[Prinses.PrinsessPossitionOx, Prinses.PrinsessPossitionOy] = Prinses.PrinsessAvatar;
 
                     WriteLine("Princess game");
-                    WriteLine($"Your HP {HeroValue.HitPoint}");
+                    WriteLine($"Your HP {Hero.HitPoint}");
 
-                    for (GameValue.FirstCounter = 0; GameValue.FirstCounter < FieldValue.MaxFieldRow; GameValue.FirstCounter++)
+                    for (GameFunction.FirstCounter = 0; GameFunction.FirstCounter < Field.MaxFieldRow; GameFunction.FirstCounter++)
                     {
-                        for (GameValue.SecondCounter = 0; GameValue.SecondCounter < FieldValue.MaxFieldCoulum; GameValue.SecondCounter++)
+                        for (GameFunction.SecondCounter = 0; GameFunction.SecondCounter < Field.MaxFieldCoulum; GameFunction.SecondCounter++)
                         {
-                            Write($"{  gameField.TotalField[GameValue.FirstCounter, GameValue.SecondCounter] }\t");
+                            Write($"{  gameField.TotalField[GameFunction.FirstCounter, GameFunction.SecondCounter] }\t");
                         }
                         WriteLine();
                         WriteLine();
                     }
-                    if (gameField.TotalField[HeroValue.Oy, HeroValue.Ox] == gameField.TotalField[PrinsesValue.PrinsessPossitionOx, PrinsesValue.PrinsessPossitionOy])
+                    if (gameField.TotalField[Hero.Oy, Hero.Ox] == gameField.TotalField[Prinses.PrinsessPossitionOx, Prinses.PrinsessPossitionOy])
                     {
                         WriteLine("EEEEE Princess is safe!!! ");
 
                         gameFunction.EndCodition();
                     }
-                    else if (HeroValue.HeroAvatar == mine.Mines[HeroValue.Oy, HeroValue.Ox])
+                    else if (Hero.HeroAvatar == mine.Mines[Hero.Oy, Hero.Ox])
                     {
-                        mine.Mines[HeroValue.Oy, HeroValue.Ox] = MineValue.MineAvatar;
-                        HeroValue.HitPoint -= mine.Damage;
+                        mine.Mines[Hero.Oy, Hero.Ox] = Mine.MineAvatar;
+                        Hero.HitPoint -= mine.Damage;
 
-                        if (HeroValue.HitPoint <= 0)
+                        if (Hero.HitPoint <= 0)
                         {
                             WriteLine("GAME OVER");
 
                             gameFunction.EndCodition();
                         }
                     }
-                    if (gameField.TotalField[HeroValue.Oy, HeroValue.Ox] != MineValue.MineAvatar)
+                    if (gameField.TotalField[Hero.Oy, Hero.Ox] != Mine.MineAvatar)
                     {
-                        gameField.TotalField[HeroValue.Oy, HeroValue.Ox] = FieldValue.FieldCell;
+                        gameField.TotalField[Hero.Oy, Hero.Ox] = Field.FieldCell;
                     }
-                } while (GameValue.ExitGameСycle);
+                } while (GameFunction.ExitGameСycle);
 
-            } while (GameValue.ExitGame);
+            } while (GameFunction.ExitGame);
         }
     }
 }
