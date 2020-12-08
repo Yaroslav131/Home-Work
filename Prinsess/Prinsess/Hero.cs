@@ -28,7 +28,7 @@ namespace PersonHero
                 case ConsoleKey.NumPad2:
                 case ConsoleKey.DownArrow:
                 case ConsoleKey.S:
-                    if (Y == Field.MaxGameCoulum)
+                    if (Y == Field.MaxGameCoulum-1)
                     {
                         break;
                     }
@@ -41,7 +41,7 @@ namespace PersonHero
                 case ConsoleKey.NumPad6:
                 case ConsoleKey.RightArrow:
                 case ConsoleKey.D:
-                    if (X == Field.MaxGameRow)
+                    if (X == Field.MaxGameRow-1)
                     {
                         break;
                     }
