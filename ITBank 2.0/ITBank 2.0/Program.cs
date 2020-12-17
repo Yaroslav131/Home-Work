@@ -1,5 +1,4 @@
-﻿using BankAccounts;
-using BankCards;
+﻿using BankCards;
 using BankFunctions;
 using OutputLine;
 using static System.Console;
@@ -12,7 +11,6 @@ namespace ITBank_2._0
         {
             CardFunctions card = new CardFunctions();
             BankFunction bankFunction = new BankFunction();
-            Accounts accounts = new Accounts();
 
             WriteLine("Wellcom to the ITBank.");
 

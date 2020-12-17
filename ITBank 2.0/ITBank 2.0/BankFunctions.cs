@@ -1,13 +1,13 @@
 ﻿using BankAccount;
 using BankCards;
-using BankAccounts;
+
 using OutputLine;
 using System;
 using static System.Console;
 
 namespace BankFunctions
 {
-    public class BankFunction : Accounts
+    public class BankFunction : Aсcount
     {
         public enum CardFunctions
         {
@@ -29,6 +29,8 @@ namespace BankFunctions
             No
         }
 
+        public static Aсcount[] accounts { get; set; }
+
         public static int TypeTransition { get; set; }
         public static int SurgeryConditon { get; set; }
         public static int FunctionNumber { get; set; }
@@ -48,11 +50,11 @@ namespace BankFunctions
                 Output.InformMistake();
             }
 
-            Accounts.accounts = new Aсcount[numbersAccounts];
+            accounts = new Aсcount[numbersAccounts];
 
             for (int i = 0; i < numbersAccounts; i++)
             {
-                Accounts.accounts[i] = new Aсcount();
+                accounts[i] = new Aсcount();
             }
         }
 
@@ -118,7 +120,7 @@ namespace BankFunctions
                         Output.InformMistake();
                     }
 
-                    if (idCard > Accounts.accounts.Length || idCard < 1)
+                    if (idCard > accounts.Length || idCard < 1)
                     {
                         Output.InformMistake();
 
@@ -127,7 +129,7 @@ namespace BankFunctions
                     else
                     {
                         Cards.DebitsCards[counter] = idCard - 1;
-                        Accounts.accounts[idCard - 1].Money = 0;
+                        accounts[idCard - 1].Money = 0;
                         linkCard = false;
                     }
                 }
@@ -154,7 +156,7 @@ namespace BankFunctions
                         Output.InformMistake();
                     }
 
-                    if (idCard > Accounts.accounts.Length || idCard < 1)
+                    if (idCard > accounts.Length || idCard < 1)
                     {
                         Output.InformMistake();
 
@@ -163,7 +165,7 @@ namespace BankFunctions
                     else
                     {
                         Cards.KreditsCards[counter] = idCard - 1;
-                        Accounts.accounts[idCard - 1].Money = 0;
+                        accounts[idCard - 1].Money = 0;
                         linkCard = false;
                     }
                 }
