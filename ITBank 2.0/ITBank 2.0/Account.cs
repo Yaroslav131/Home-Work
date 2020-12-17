@@ -4,5 +4,4 @@
     {
         public double Money { get; set; }
     }
-
 }

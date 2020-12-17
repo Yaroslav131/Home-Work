@@ -40,7 +40,7 @@ namespace ITBank_2._0
 
                         card.AddMoney();
 
-                        bankFunction.ChooreSurgery();
+                        bankFunction.ChooseSurgery();
 
                         break;
 
@@ -54,7 +54,7 @@ namespace ITBank_2._0
 
                         card.GetMoney();
 
-                        bankFunction.ChooreSurgery();
+                        bankFunction.ChooseSurgery();
 
                         break;
 
@@ -68,7 +68,7 @@ namespace ITBank_2._0
 
                         card.ShowMoney();
 
-                        bankFunction.ChooreSurgery();
+                        bankFunction.ChooseSurgery();
 
                         break;
 
@@ -91,7 +91,7 @@ namespace ITBank_2._0
                             card.TransitMoneyOhterAccount();
                         }
 
-                        bankFunction.ChooreSurgery();
+                        bankFunction.ChooseSurgery();
 
                         break;
 
@@ -101,7 +101,7 @@ namespace ITBank_2._0
 
                         WriteLine("We don't have this operatioin,try again.");
 
-                        bankFunction.ChooreSurgery();
+                        bankFunction.ChooseSurgery();
 
                         break;
                 }

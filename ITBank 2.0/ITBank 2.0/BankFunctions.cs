@@ -1,6 +1,5 @@
 ﻿using BankAccount;
 using BankCards;
-
 using OutputLine;
 using System;
 using static System.Console;
@@ -30,7 +29,6 @@ namespace BankFunctions
         }
 
         public static Aсcount[] accounts { get; set; }
-
         public static int TypeTransition { get; set; }
         public static int SurgeryConditon { get; set; }
         public static int FunctionNumber { get; set; }
@@ -39,7 +37,7 @@ namespace BankFunctions
         private int numbersAccounts;
         private int numbersCards;
         private int idCard;
-        private bool linkCard;
+        private bool wrongLinkCard;
 
         public void CreatAccuonts()
         {
@@ -124,13 +122,13 @@ namespace BankFunctions
                     {
                         Output.InformMistake();
 
-                        linkCard = true;
+                        wrongLinkCard = true;
                     }
                     else
                     {
                         Cards.DebitsCards[counter] = idCard - 1;
                         accounts[idCard - 1].Money = 0;
-                        linkCard = false;
+                        wrongLinkCard = false;
                     }
                 }
 
@@ -160,22 +158,22 @@ namespace BankFunctions
                     {
                         Output.InformMistake();
 
-                        linkCard = true;
+                        wrongLinkCard = true;
                     }
                     else
                     {
                         Cards.KreditsCards[counter] = idCard - 1;
                         accounts[idCard - 1].Money = 0;
-                        linkCard = false;
+                        wrongLinkCard = false;
                     }
                 }
 
-                if (linkCard == true)
+                if (wrongLinkCard == true)
                 {
                     WriteLine("We have problem with registration,try again.");
                 }
             }
-            while (linkCard);
+            while (wrongLinkCard);
         }
 
         public void ChooseTypeTransitoin()
@@ -206,7 +204,7 @@ namespace BankFunctions
             while (UnknownKey);
         }
 
-        public void ChooreSurgery()
+        public void ChooseSurgery()
         {
 
             Output.ShowSurgery();

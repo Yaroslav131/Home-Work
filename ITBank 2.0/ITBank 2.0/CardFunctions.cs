@@ -19,7 +19,7 @@ namespace BankCards
         private double addMoney;
         private double getMoney;
         private double transitMoney;
-        private int NumberAccountForTrans;
+        private int numberAccountForTrans;
 
         private string recipientName;
         private string recipientSurname;
@@ -35,7 +35,7 @@ namespace BankCards
         private bool rightAccount;
         private bool credit;
 
-        private int[] SomeCards;
+        private int[] someCards;
 
         public void ChooseCard()
         {
@@ -91,7 +91,7 @@ namespace BankCards
 
             if (rightAccount)
             {
-                BankFunction.accounts[SomeCards[numberCardForArray]].Money += addMoney;
+                BankFunction.accounts[someCards[numberCardForArray]].Money += addMoney;
 
                 WriteLine("Loading...");
 
@@ -126,13 +126,13 @@ namespace BankCards
                 }
                 else
                 {
-                    if (getMoney > BankFunction.accounts[SomeCards[numberCardForArray]].Money || SomeCards == Cards.DebitsCards)
+                    if (getMoney > BankFunction.accounts[someCards[numberCardForArray]].Money || someCards == Cards.DebitsCards)
                     {
                         WriteLine("You dont have enough money on account.");
                     }
                     else
                     {
-                        BankFunction.accounts[SomeCards[numberCardForArray]].Money -= getMoney;
+                        BankFunction.accounts[someCards[numberCardForArray]].Money -= getMoney;
 
                         WriteLine("Loading...");
 
@@ -164,7 +164,7 @@ namespace BankCards
 
                 WriteLine("Operation was a success.");
 
-                WriteLine($"In Your accont {  BankFunction.accounts[SomeCards[numberCardForArray]].Money }$.");
+                WriteLine($"In Your accont {  BankFunction.accounts[someCards[numberCardForArray]].Money }$.");
             }
             else
             {
@@ -186,7 +186,7 @@ namespace BankCards
 
             WriteLine("Choose acount, which you want to transfer money.");
 
-            while (!int.TryParse(ReadLine(), out NumberAccountForTrans))
+            while (!int.TryParse(ReadLine(), out numberAccountForTrans))
             {
                 Output.InformMistake();
             }
@@ -212,7 +212,7 @@ namespace BankCards
                         if (wrongAccount == false)
                         {
                             BankFunction.accounts[Cards.KreditsCards[numberCardForArray]].Money -= transitMoney;
-                            BankFunction.accounts[NumberAccountForTrans - ConverToArrayStyle].Money += transitMoney;
+                            BankFunction.accounts[numberAccountForTrans - ConverToArrayStyle].Money += transitMoney;
 
                             WriteLine("Loading...");
 
@@ -285,13 +285,13 @@ namespace BankCards
 
             if (rightAccount)
             {
-                if (BankFunction.accounts[SomeCards[numberCardForArray]].Money < transitMoney && SomeCards==Cards.DebitsCards)
+                if (BankFunction.accounts[someCards[numberCardForArray]].Money < transitMoney && someCards == Cards.DebitsCards)
                 {
                     WriteLine("You dont have enough money on account.  ");
                 }
                 else
                 {
-                    BankFunction.accounts[SomeCards[numberCardForArray]].Money -= transitMoney;
+                    BankFunction.accounts[someCards[numberCardForArray]].Money -= transitMoney;
 
                     WriteLine("Loading...");
 
@@ -306,11 +306,11 @@ namespace BankCards
         {
             if (typeCard == (int)TypeCards.Debit)
             {
-                SomeCards = Cards.DebitsCards;
+                someCards = Cards.DebitsCards;
             }
             else if (typeCard == (int)TypeCards.Credit)
             {
-                SomeCards = Cards.KreditsCards;
+                someCards = Cards.KreditsCards;
             }
 
             for (int counter = 0; counter < BankFunction.accounts.Length; counter++)
@@ -323,9 +323,9 @@ namespace BankCards
                 }
             }
 
-            for (int counter = 0; counter < SomeCards.Length; counter++)
+            for (int counter = 0; counter < someCards.Length; counter++)
             {
-                rightAccount = numberCard == SomeCards[counter];
+                rightAccount = numberCard == someCards[counter];
 
                 if (rightAccount == true)
                 {
@@ -333,11 +333,11 @@ namespace BankCards
                 }
             }
 
-            if (SomeCards == Cards.DebitsCards)
+            if (someCards == Cards.DebitsCards)
             {
-                for (int i = 0; i < SomeCards.Length; i++)
+                for (int counter = 0; counter < someCards.Length; counter++)
                 {
-                    if (NumberAccountForTrans - ConverToArrayStyle == SomeCards[i])
+                    if (numberAccountForTrans - ConverToArrayStyle == someCards[counter])
                     {
                         wrongAccount = true;
 
