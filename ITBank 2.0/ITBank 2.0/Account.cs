@@ -1,6 +1,6 @@
 ﻿namespace BankAccount
 {
-    public class Aсcount
+    public class Account
     {
         public double Money { get; set; }
     }

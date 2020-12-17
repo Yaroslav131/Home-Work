@@ -1,4 +1,5 @@
 ﻿using BankAccount;
+using BankAccounts;
 using BankCards;
 using OutputLine;
 using System;
@@ -6,8 +7,10 @@ using static System.Console;
 
 namespace BankFunctions
 {
-    public class BankFunction : Aсcount
+    public class BankFunction
     {
+        Cards cards = new Cards();
+
         public enum CardFunctions
         {
             AddMoney = 1,
@@ -28,7 +31,6 @@ namespace BankFunctions
             No
         }
 
-        public static Aсcount[] accounts { get; set; }
         public static int TypeTransition { get; set; }
         public static int SurgeryConditon { get; set; }
         public static int FunctionNumber { get; set; }
@@ -48,11 +50,11 @@ namespace BankFunctions
                 Output.InformMistake();
             }
 
-            accounts = new Aсcount[numbersAccounts];
+            Accounts.UserAccounts = new Account[numbersAccounts];
 
             for (int i = 0; i < numbersAccounts; i++)
             {
-                accounts[i] = new Aсcount();
+                Accounts.UserAccounts[i] = new Account();
             }
         }
 
@@ -109,7 +111,7 @@ namespace BankFunctions
 
                 for (int counter = 0; counter < numbersCards; counter++)
                 {
-                    Cards.DebitsCards = new int[numbersCards];
+                    cards.DebitsCards = new int[numbersCards];
 
                     WriteLine("Choose account for debit card. ");
 
@@ -118,7 +120,7 @@ namespace BankFunctions
                         Output.InformMistake();
                     }
 
-                    if (idCard > accounts.Length || idCard < 1)
+                    if (idCard > Accounts.UserAccounts.Length || idCard < 1)
                     {
                         Output.InformMistake();
 
@@ -126,8 +128,8 @@ namespace BankFunctions
                     }
                     else
                     {
-                        Cards.DebitsCards[counter] = idCard - 1;
-                        accounts[idCard - 1].Money = 0;
+                        cards.DebitsCards[counter] = idCard - 1;
+                        Accounts.UserAccounts[idCard - 1].Money = 0;
                         wrongLinkCard = false;
                     }
                 }
@@ -145,7 +147,7 @@ namespace BankFunctions
 
                 for (int counter = 0; counter < numbersCards; counter++)
                 {
-                    Cards.KreditsCards = new int[numbersCards];
+                    cards.KreditsCards = new int[numbersCards];
 
                     WriteLine("Choose  account for credit card. ");
 
@@ -154,7 +156,7 @@ namespace BankFunctions
                         Output.InformMistake();
                     }
 
-                    if (idCard > accounts.Length || idCard < 1)
+                    if (idCard > Accounts.UserAccounts.Length || idCard < 1)
                     {
                         Output.InformMistake();
 
@@ -162,8 +164,8 @@ namespace BankFunctions
                     }
                     else
                     {
-                        Cards.KreditsCards[counter] = idCard - 1;
-                        accounts[idCard - 1].Money = 0;
+                        cards.KreditsCards[counter] = idCard - 1;
+                        Accounts.UserAccounts[idCard - 1].Money = 0;
                         wrongLinkCard = false;
                     }
                 }

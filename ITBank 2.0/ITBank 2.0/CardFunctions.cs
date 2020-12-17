@@ -1,13 +1,17 @@
 ﻿using BankFunctions;
 using OutputLine;
+using BankAccounts;
+using BankCards;
 using System;
 using System.Threading;
 using static System.Console;
 
 namespace BankCards
 {
-    public class CardFunctions
+    public class CardFunctions: Cards
     {
+        Accounts accounts = new Accounts();
+
         public enum TypeCards
         {
             Debit = 1,
@@ -91,7 +95,7 @@ namespace BankCards
 
             if (rightAccount)
             {
-                BankFunction.accounts[someCards[numberCardForArray]].Money += addMoney;
+                Accounts.UserAccounts[someCards[numberCardForArray]].Money += addMoney;
 
                 WriteLine("Loading...");
 
@@ -126,13 +130,13 @@ namespace BankCards
                 }
                 else
                 {
-                    if (getMoney > BankFunction.accounts[someCards[numberCardForArray]].Money || someCards == Cards.DebitsCards)
+                    if (getMoney > Accounts.UserAccounts[someCards[numberCardForArray]].Money || someCards == DebitsCards)
                     {
                         WriteLine("You dont have enough money on account.");
                     }
                     else
                     {
-                        BankFunction.accounts[someCards[numberCardForArray]].Money -= getMoney;
+                        Accounts.UserAccounts[someCards[numberCardForArray]].Money -= getMoney;
 
                         WriteLine("Loading...");
 
@@ -164,7 +168,7 @@ namespace BankCards
 
                 WriteLine("Operation was a success.");
 
-                WriteLine($"In Your accont {  BankFunction.accounts[someCards[numberCardForArray]].Money }$.");
+                WriteLine($"In Your accont {Accounts.UserAccounts[someCards[numberCardForArray]].Money }$.");
             }
             else
             {
@@ -203,7 +207,7 @@ namespace BankCards
                 }
                 else
                 {
-                    if (BankFunction.accounts[Cards.DebitsCards[numberCardForArray]].Money < transitMoney)
+                    if (Accounts.UserAccounts[DebitsCards[numberCardForArray]].Money < transitMoney)
                     {
                         WriteLine("You dont have enough money on account.");
                     }
@@ -211,8 +215,8 @@ namespace BankCards
                     {
                         if (wrongAccount == false)
                         {
-                            BankFunction.accounts[Cards.KreditsCards[numberCardForArray]].Money -= transitMoney;
-                            BankFunction.accounts[numberAccountForTrans - ConverToArrayStyle].Money += transitMoney;
+                            Accounts.UserAccounts[KreditsCards[numberCardForArray]].Money -= transitMoney;
+                            Accounts.UserAccounts[numberAccountForTrans - ConverToArrayStyle].Money += transitMoney;
 
                             WriteLine("Loading...");
 
@@ -285,13 +289,13 @@ namespace BankCards
 
             if (rightAccount)
             {
-                if (BankFunction.accounts[someCards[numberCardForArray]].Money < transitMoney && someCards == Cards.DebitsCards)
+                if (Accounts.UserAccounts[someCards[numberCardForArray]].Money < transitMoney && someCards ==DebitsCards)
                 {
                     WriteLine("You dont have enough money on account.  ");
                 }
                 else
                 {
-                    BankFunction.accounts[someCards[numberCardForArray]].Money -= transitMoney;
+                    Accounts.UserAccounts[someCards[numberCardForArray]].Money -= transitMoney;
 
                     WriteLine("Loading...");
 
@@ -306,16 +310,16 @@ namespace BankCards
         {
             if (typeCard == (int)TypeCards.Debit)
             {
-                someCards = Cards.DebitsCards;
+                someCards = DebitsCards;
             }
             else if (typeCard == (int)TypeCards.Credit)
             {
-                someCards = Cards.KreditsCards;
+                someCards = KreditsCards;
             }
 
-            for (int counter = 0; counter < BankFunction.accounts.Length; counter++)
+            for (int counter = 0; counter < Accounts.UserAccounts.Length; counter++)
             {
-                credit = BankFunction.accounts[counter].Money < 0;
+                credit = Accounts.UserAccounts[counter].Money < 0;
 
                 if (credit == true)
                 {
@@ -333,7 +337,7 @@ namespace BankCards
                 }
             }
 
-            if (someCards == Cards.DebitsCards)
+            if (someCards == DebitsCards)
             {
                 for (int counter = 0; counter < someCards.Length; counter++)
                 {

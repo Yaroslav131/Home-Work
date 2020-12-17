@@ -1,8 +1,8 @@
 ﻿namespace BankCards
 {
-    class Cards
+    public class Cards
     {
-        public static int[] DebitsCards { get; set; }
-        public static int[] KreditsCards { get; set; }
+        public int[] DebitsCards { get; set; }
+        public int[] KreditsCards { get; set; }
     }
 }
