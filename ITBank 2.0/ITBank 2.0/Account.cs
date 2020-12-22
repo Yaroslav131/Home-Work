@@ -1,6 +1,6 @@
-﻿namespace BankAccount
+﻿namespace ITBank_2._0
 {
-    public class Account
+    public class Accounts
     {
         public double Money { get; set; }
     }

@@ -1,7 +1,8 @@
 ﻿using static System.Console;
-namespace OutputLine
+
+namespace ITBank_2._0
 {
-    public class Output
+    public static class Output
     {
         public static void InformMistake()
         {

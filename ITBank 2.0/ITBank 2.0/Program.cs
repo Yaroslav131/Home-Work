@@ -1,7 +1,4 @@
-﻿using BankCards;
-using BankFunctions;
-using OutputLine;
-using static System.Console;
+﻿using static System.Console;
 
 namespace ITBank_2._0
 {
@@ -9,16 +6,20 @@ namespace ITBank_2._0
     {
         public static void Main(string[] args)
         {
-            CardFunctions card = new CardFunctions();
-            BankFunction bankFunction = new BankFunction();
+
+            BankFunctions bankFunctions = new BankFunctions();
 
             WriteLine("Wellcom to the ITBank.");
 
-            bankFunction.CreatAccuonts();
+            bankFunctions.CreatAccounts();
 
             Clear();
 
-            bankFunction.LinkCards();
+            bankFunctions.LinkDebitCards();
+
+            Clear();
+
+            bankFunctions.LinkKreditCards();
 
             do
             {
@@ -26,72 +27,72 @@ namespace ITBank_2._0
 
                 Output.ShowFunctions();
 
-                bankFunction.ChooseFunction();
+                bankFunctions.ChooseFunction();
 
-                switch (BankFunction.FunctionNumber)
+                switch (BankFunctions.FunctionNumber)
                 {
-                    case (int)BankFunction.CardFunctions.AddMoney:
+                    case (int)BankFunctions.CardFunctions.AddMoney:
 
                         Clear();
 
-                        card.ChooseCard();
+                        bankFunctions.ChooseCard();
 
                         Clear();
 
-                        card.AddMoney();
+                        bankFunctions.AddMoney();
 
-                        bankFunction.ChooseSurgery();
+                        bankFunctions.ChooseSurgery();
 
                         break;
 
-                    case (int)BankFunction.CardFunctions.GetMoney:
+                    case (int)BankFunctions.CardFunctions.GetMoney:
 
                         Clear();
 
-                        card.ChooseCard();
+                        bankFunctions.ChooseCard();
 
                         Clear();
 
-                        card.GetMoney();
+                        bankFunctions.GetMoney();
 
-                        bankFunction.ChooseSurgery();
+                        bankFunctions.ChooseSurgery();
 
                         break;
 
-                    case (int)BankFunction.CardFunctions.ShowMoney:
+                    case (int)BankFunctions.CardFunctions.ShowMoney:
 
                         Clear();
 
-                        card.ChooseCard();
+                        bankFunctions.ChooseCard();
 
                         Clear();
 
-                        card.ShowMoney();
+                        bankFunctions.ShowMoney();
 
-                        bankFunction.ChooseSurgery();
+                        bankFunctions.ChooseSurgery();
 
                         break;
 
-                    case (int)BankFunction.CardFunctions.TransitMoney:
+                    case (int)BankFunctions.CardFunctions.TransitMoney:
 
                         Clear();
 
-                        bankFunction.ChooseTypeTransitoin();
+                        bankFunctions.ChooseTypeTransitoin();
 
                         Clear();
 
-                        card.ChooseCard();
+                        bankFunctions.ChooseCard();
 
-                        if (BankFunction.TypeTransition == (int)BankFunction.TypeTransit.TransitMoney)
+                        if (BankFunctions.TypeTransition == (int)BankFunctions.TypeTransits.TransitMoney)
                         {
-                            card.TransitMoney();
+                            bankFunctions.TransitMoney();
                         }
-                        else if (BankFunction.TypeTransition == (int)BankFunction.TypeTransit.TransitMoneyOhterAccount)
+                        else if (BankFunctions.TypeTransition == (int)BankFunctions.TypeTransits.TransitMoneyOhterAccount)
                         {
-                            card.TransitMoneyOhterAccount();
+                            bankFunctions.TransitMoneyOhterAccount();
                         }
 
-                        bankFunction.ChooseSurgery();
+                        bankFunctions.ChooseSurgery();
 
                         break;
 
@@ -101,12 +102,12 @@ namespace ITBank_2._0
 
                         WriteLine("We don't have this operatioin,try again.");
 
-                        bankFunction.ChooseSurgery();
+                        bankFunctions.ChooseSurgery();
 
                         break;
                 }
             }
-            while (BankFunction.SurgeryConditon == (int)BankFunction.SurgeryConditons.Yes);
+            while (BankFunctions.SurgeryConditon == (int)BankFunctions.SurgeryConditons.Yes);
         }
     }
 }
