@@ -6,7 +6,6 @@ namespace ITBank_2._0
     {
         public static void Main(string[] args)
         {
-
             BankFunctions bankFunctions = new BankFunctions();
 
             WriteLine("Wellcom to the ITBank.");
@@ -19,7 +18,7 @@ namespace ITBank_2._0
 
             Clear();
 
-            bankFunctions.LinkKreditCards();
+            bankFunctions.LinkCreditCards();
 
             do
             {

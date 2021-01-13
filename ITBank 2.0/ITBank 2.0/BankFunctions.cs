@@ -34,12 +34,12 @@ namespace ITBank_2._0
 
         private const int ConvertToArrayStyle = 1;
 
-        public static Accounts[] accounts;
-        private int numbersAccounts;
+        private ulong numbersAccounts;
 
         private int typeCard;
-        private int numberCard;
-        private int numberCardForArray;
+        private ulong numberCard;
+        private ulong numberCardForArray;
+        private ulong numberAccountForTrans;
 
         private bool wrongAccount;
         private bool rightAccount;
@@ -47,14 +47,13 @@ namespace ITBank_2._0
         private bool wrongLinkCard;
         private bool unknownKey;
 
-        private int numbersCards;
+        private ulong numbersCards;
         private int idCard;
         private int[] someCards;
 
         private double addMoney;
         private double getMoney;
         private double transitMoney;
-        private int numberAccountForTrans;
 
         private string recipientName;
         private string recipientSurname;
@@ -70,17 +69,12 @@ namespace ITBank_2._0
         {
             WriteLine("How mach do you want accounts?");
 
-            while (!int.TryParse(ReadLine(), out numbersAccounts))
+            while (!ulong.TryParse(ReadLine(), out numbersAccounts))
             {
                 Output.InformMistake();
             }
 
-            accounts = new Accounts[numbersAccounts];
-
-            for (int counter = 0; counter < numbersAccounts; counter++)
-            {
-                accounts[counter] = new Accounts();
-            }
+            BankStorage.AccountsScore = new double[numbersAccounts];
         }
 
         public void LinkDebitCards()
@@ -89,16 +83,16 @@ namespace ITBank_2._0
             {
                 WriteLine("Choose how mach you want have debit cards. ");
 
-                while (!int.TryParse(ReadLine(), out numbersCards))
+                while (!ulong.TryParse(ReadLine(), out numbersCards))
                 {
                     Output.InformMistake();
                 }
 
                 Clear();
 
-                for (int counter = 0; counter < numbersCards; counter++)
+                for (uint counter = 0; counter < numbersCards; counter++)
                 {
-                    DebitCard.DebitCards = new int[numbersCards];
+                    BankStorage.DebitCards = new int[numbersCards];
 
                     WriteLine("Choose account for debit card. ");
 
@@ -107,7 +101,7 @@ namespace ITBank_2._0
                         Output.InformMistake();
                     }
 
-                    if (idCard > accounts.Length || idCard < 1)
+                    if (idCard > BankStorage.AccountsScore.Length || idCard < 1)
                     {
                         Output.InformMistake();
 
@@ -115,8 +109,8 @@ namespace ITBank_2._0
                     }
                     else
                     {
-                        DebitCard.DebitCards[counter] = idCard - 1;
-                        accounts[idCard - 1].Money = 0;
+                        BankStorage.DebitCards[counter] = idCard - 1;
+                        BankStorage.AccountsScore[idCard - 1] = 0;
                         wrongLinkCard = false;
                     }
                 }
@@ -124,22 +118,22 @@ namespace ITBank_2._0
             while (wrongLinkCard);
         }
 
-        public void LinkKreditCards()
+        public void LinkCreditCards()
         {
             do
             {
                 WriteLine("Choose how mach you want have credit card. ");
 
-                while (!int.TryParse(ReadLine(), out numbersCards))
+                while (!ulong.TryParse(ReadLine(), out numbersCards))
                 {
                     Output.InformMistake();
                 }
 
                 Clear();
 
-                for (int counter = 0; counter < numbersCards; counter++)
+                for (uint counter = 0; counter < numbersCards; counter++)
                 {
-                    KreditCard.KreditCards = new int[numbersCards];
+                    BankStorage.CreditCards = new int[numbersCards];
 
                     WriteLine("Choose  account for credit card. ");
 
@@ -148,7 +142,7 @@ namespace ITBank_2._0
                         Output.InformMistake();
                     }
 
-                    if (idCard > accounts.Length || idCard < 1)
+                    if (idCard > BankStorage.AccountsScore.Length || idCard < 1)
                     {
                         Output.InformMistake();
 
@@ -156,8 +150,8 @@ namespace ITBank_2._0
                     }
                     else
                     {
-                        KreditCard.KreditCards[counter] = idCard - 1;
-                        accounts[idCard - 1].Money = 0;
+                        BankStorage.CreditCards[counter] = idCard - 1;
+                        BankStorage.AccountsScore[idCard - 1] = 0;
                         wrongLinkCard = false;
                     }
                 }
@@ -187,7 +181,7 @@ namespace ITBank_2._0
 
             if (rightAccount)
             {
-                accounts[someCards[numberCardForArray]].Money += addMoney;
+                BankStorage.AccountsScore[someCards[numberCardForArray]] += addMoney;
 
                 WriteLine("Loading...");
 
@@ -214,7 +208,7 @@ namespace ITBank_2._0
 
             CheckTypeCard();
 
-            CheckKredit();
+            CheckCredit();
 
             CheckRightAccount();
 
@@ -226,13 +220,13 @@ namespace ITBank_2._0
                 }
                 else
                 {
-                    if (getMoney > accounts[someCards[numberCardForArray]].Money && someCards == DebitCard.DebitCards)
+                    if (getMoney > BankStorage.AccountsScore[someCards[numberCardForArray]] && someCards == BankStorage.DebitCards)
                     {
                         WriteLine("You dont have enough money on account.");
                     }
                     else
                     {
-                        accounts[someCards[numberCardForArray]].Money -= getMoney;
+                        BankStorage.AccountsScore[someCards[numberCardForArray]] -= getMoney;
 
                         WriteLine("Loading...");
 
@@ -266,7 +260,7 @@ namespace ITBank_2._0
 
                 WriteLine("Operation was a success.");
 
-                WriteLine($"In Your accont { accounts[someCards[numberCardForArray]].Money }$.");
+                WriteLine($"In Your accont { BankStorage.AccountsScore[someCards[numberCardForArray]] }$.");
             }
             else
             {
@@ -288,7 +282,7 @@ namespace ITBank_2._0
 
             WriteLine("Choose acount, which you want to transfer money.");
 
-            while (!int.TryParse(ReadLine(), out numberAccountForTrans))
+            while (!ulong.TryParse(ReadLine(), out numberAccountForTrans))
             {
                 Output.InformMistake();
             }
@@ -297,7 +291,7 @@ namespace ITBank_2._0
 
             CheckTypeCard();
 
-            CheckKredit();
+            CheckCredit();
 
             CheckRightAccount();
 
@@ -311,7 +305,7 @@ namespace ITBank_2._0
                 }
                 else
                 {
-                    if (accounts[DebitCard.DebitCards[numberCardForArray]].Money < transitMoney)
+                    if (BankStorage.AccountsScore[BankStorage.DebitCards[numberCardForArray]] < transitMoney)
                     {
                         WriteLine("You dont have enough money on account.");
                     }
@@ -319,8 +313,8 @@ namespace ITBank_2._0
                     {
                         if (wrongAccount == false)
                         {
-                            accounts[KreditCard.KreditCards[numberCardForArray]].Money -= transitMoney;
-                            accounts[numberAccountForTrans - ConvertToArrayStyle].Money += transitMoney;
+                            BankStorage.AccountsScore[BankStorage.CreditCards[numberCardForArray]] -= transitMoney;
+                            BankStorage.AccountsScore[numberAccountForTrans - ConvertToArrayStyle] += transitMoney;
 
                             WriteLine("Loading...");
 
@@ -391,19 +385,19 @@ namespace ITBank_2._0
 
             CheckTypeCard();
 
-            CheckKredit();
+            CheckCredit();
 
             CheckRightAccount();
 
             if (rightAccount)
             {
-                if (accounts[someCards[numberCardForArray]].Money < transitMoney && someCards == DebitCard.DebitCards)
+                if (BankStorage.AccountsScore[someCards[numberCardForArray]] < transitMoney && someCards == BankStorage.DebitCards)
                 {
-                    WriteLine("You dont have enough money on account.  ");
+                    WriteLine("You don't have enough money on account.  ");
                 }
                 else
                 {
-                    accounts[someCards[numberCardForArray]].Money -= transitMoney;
+                    BankStorage.AccountsScore[someCards[numberCardForArray]] -= transitMoney;
 
                     WriteLine("Loading...");
 
@@ -418,19 +412,19 @@ namespace ITBank_2._0
         {
             if (typeCard == (int)TypeCards.Debit)
             {
-                someCards = DebitCard.DebitCards;
+                someCards = BankStorage.DebitCards;
             }
             else if (typeCard == (int)TypeCards.Credit)
             {
-                someCards = KreditCard.KreditCards;
+                someCards = BankStorage.CreditCards;
             }
         }
 
-        public void CheckKredit()
+        public void CheckCredit()
         {
-            for (int counter = 0; counter < accounts.Length; counter++)
+            for (int counter = 0; counter < BankStorage.AccountsScore.Length; counter++)
             {
-                credit = accounts[counter].Money < 0;
+                credit = BankStorage.AccountsScore[counter] < 0;
 
                 if (credit == true)
                 {
@@ -441,7 +435,7 @@ namespace ITBank_2._0
 
         public void CheckRightAccount()
         {
-            for (int counter = 0; counter < someCards.Length; counter++)
+            for (uint counter = 0; counter < someCards.Length; counter++)
             {
                 rightAccount = numberCard - ConvertToArrayStyle == counter;
 
@@ -454,11 +448,11 @@ namespace ITBank_2._0
 
         public void CheckNumberAccountForTrans()
         {
-            if (someCards == DebitCard.DebitCards)
+            if (someCards == BankStorage.DebitCards)
             {
-                for (int counter = 0; counter < someCards.Length; counter++)
+                for (uint counter = 0; counter < someCards.Length; counter++)
                 {
-                    if (numberAccountForTrans == someCards[counter])
+                    if (numberAccountForTrans == counter)
                     {
                         wrongAccount = true;
 
@@ -592,7 +586,7 @@ namespace ITBank_2._0
 
             WriteLine("Choose number of card");
 
-            while (!int.TryParse(ReadLine(), out numberCard))
+            while (!ulong.TryParse(ReadLine(), out numberCard))
             {
                 Output.InformMistake();
             }
