@@ -9,6 +9,5 @@ namespace ITBank_2._0
         public static int[] DebitCards { get; set; }
         public static int[] CreditCards { get; set; }
         public static double[] AccountsScore { get; set; }
-
     }
 }
