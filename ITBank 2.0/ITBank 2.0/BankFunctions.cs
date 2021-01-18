@@ -34,12 +34,12 @@ namespace ITBank_2._0
 
         private const int ConvertToArrayStyle = 1;
 
-        private ulong numbersAccounts;
+        private long numbersAccounts;
 
         private int typeCard;
-        private ulong numberCard;
-        private ulong numberCardForArray;
-        private ulong numberAccountForTrans;
+        private long numberCard;
+        private long numberCardForArray;
+        private long numberAccountForTrans;
 
         private bool wrongAccount;
         private bool rightAccount;
@@ -47,7 +47,7 @@ namespace ITBank_2._0
         private bool wrongLinkCard;
         private bool unknownKey;
 
-        private ulong numbersCards;
+        private long numbersCards;
         private int idCard;
         private int[] someCards;
 
@@ -69,8 +69,10 @@ namespace ITBank_2._0
         {
             WriteLine("How mach do you want accounts?");
 
-            while (!ulong.TryParse(ReadLine(), out numbersAccounts))
+            while (!long.TryParse(ReadLine(), out numbersAccounts) || numbersAccounts<=0)
             {
+                Clear();
+
                 Output.InformMistake();
             }
 
@@ -83,20 +85,22 @@ namespace ITBank_2._0
             {
                 WriteLine("Choose how mach you want have debit cards. ");
 
-                while (!ulong.TryParse(ReadLine(), out numbersCards))
+                while (!long.TryParse(ReadLine(), out numbersCards) || numbersCards <= 0)
                 {
+                    Clear();
+
                     Output.InformMistake();
                 }
 
                 Clear();
 
-                for (uint counter = 0; counter < numbersCards; counter++)
+                for (int counter = 0; counter < numbersCards; counter++)
                 {
                     BankStorage.DebitCards = new int[numbersCards];
 
                     WriteLine("Choose account for debit card. ");
 
-                    while (!int.TryParse(ReadLine(), out idCard))
+                    while (!int.TryParse(ReadLine(), out idCard) || idCard <= 0)
                     {
                         Output.InformMistake();
                     }
@@ -124,21 +128,25 @@ namespace ITBank_2._0
             {
                 WriteLine("Choose how mach you want have credit card. ");
 
-                while (!ulong.TryParse(ReadLine(), out numbersCards))
+                while (!long.TryParse(ReadLine(), out numbersCards) || numbersCards <= 0)
                 {
+                    Clear();
+
                     Output.InformMistake();
                 }
 
                 Clear();
 
-                for (uint counter = 0; counter < numbersCards; counter++)
+                for (int counter = 0; counter < numbersCards; counter++)
                 {
                     BankStorage.CreditCards = new int[numbersCards];
 
                     WriteLine("Choose  account for credit card. ");
 
-                    while (!int.TryParse(ReadLine(), out idCard))
+                    while (!int.TryParse(ReadLine(), out idCard) || idCard <= 0)
                     {
+                        Clear();
+
                         Output.InformMistake();
                     }
 
@@ -282,7 +290,7 @@ namespace ITBank_2._0
 
             WriteLine("Choose acount, which you want to transfer money.");
 
-            while (!ulong.TryParse(ReadLine(), out numberAccountForTrans))
+            while (!long.TryParse(ReadLine(), out numberAccountForTrans))
             {
                 Output.InformMistake();
             }
@@ -435,7 +443,7 @@ namespace ITBank_2._0
 
         public void CheckRightAccount()
         {
-            for (uint counter = 0; counter < someCards.Length; counter++)
+            for (int counter = 0; counter < someCards.Length; counter++)
             {
                 rightAccount = numberCard - ConvertToArrayStyle == counter;
 
@@ -450,7 +458,7 @@ namespace ITBank_2._0
         {
             if (someCards == BankStorage.DebitCards)
             {
-                for (uint counter = 0; counter < someCards.Length; counter++)
+                for (int counter = 0; counter < someCards.Length; counter++)
                 {
                     if (numberAccountForTrans == counter)
                     {
@@ -586,7 +594,7 @@ namespace ITBank_2._0
 
             WriteLine("Choose number of card");
 
-            while (!ulong.TryParse(ReadLine(), out numberCard))
+            while (!long.TryParse(ReadLine(), out numberCard))
             {
                 Output.InformMistake();
             }
