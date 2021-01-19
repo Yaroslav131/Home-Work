@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ITBank_2._0
+﻿namespace ITBank_2._0
 {
     class BankStorage
     {

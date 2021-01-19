@@ -12,101 +12,117 @@ namespace ITBank_2._0
 
             bankFunctions.CreatAccounts();
 
-            Clear();
-
-            bankFunctions.LinkDebitCards();
-
-            Clear();
-
-            bankFunctions.LinkCreditCards();
-
             do
             {
                 Clear();
 
-                Output.ShowFunctions();
+                bankFunctions.LinkDebitCards();
 
-                bankFunctions.ChooseFunction();
+                Clear();
 
-                switch (BankFunctions.FunctionNumber)
+                bankFunctions.LinkCreditCards();
+
+                if (BankStorage.DebitCards.Length == 0 && BankStorage.DebitCards.Length == 0)
                 {
-                    case (int)BankFunctions.CardFunctions.AddMoney:
-
-                        Clear();
-
-                        bankFunctions.ChooseCard();
-
-                        Clear();
-
-                        bankFunctions.AddMoney();
-
-                        bankFunctions.ChooseSurgery();
-
-                        break;
-
-                    case (int)BankFunctions.CardFunctions.GetMoney:
-
-                        Clear();
-
-                        bankFunctions.ChooseCard();
-
-                        Clear();
-
-                        bankFunctions.GetMoney();
-
-                        bankFunctions.ChooseSurgery();
-
-                        break;
-
-                    case (int)BankFunctions.CardFunctions.ShowMoney:
-
-                        Clear();
-
-                        bankFunctions.ChooseCard();
-
-                        Clear();
-
-                        bankFunctions.ShowMoney();
-
-                        bankFunctions.ChooseSurgery();
-
-                        break;
-
-                    case (int)BankFunctions.CardFunctions.TransitMoney:
-
-                        Clear();
-
-                        bankFunctions.ChooseTypeTransitoin();
-
-                        Clear();
-
-                        bankFunctions.ChooseCard();
-
-                        if (BankFunctions.TypeTransition == (int)BankFunctions.TypeTransits.TransitMoney)
-                        {
-                            bankFunctions.TransitMoney();
-                        }
-                        else if (BankFunctions.TypeTransition == (int)BankFunctions.TypeTransits.TransitMoneyOhterAccount)
-                        {
-                            bankFunctions.TransitMoneyOhterAccount();
-                        }
-
-                        bankFunctions.ChooseSurgery();
-
-                        break;
-
-                    default:
-
-                        Clear();
-
-                        WriteLine("We don't have this operatioin,try again.");
-
-                        bankFunctions.ChooseSurgery();
-
-                        break;
+                    WriteLine("You don't have card in this bank");
+                 
+                    bankFunctions.RecreateCard();
                 }
             }
-            while (BankFunctions.SurgeryConditon == (int)BankFunctions.SurgeryConditons.Yes);
+            while (BankFunctions.RebuildConditon);
+
+            if (!(BankStorage.DebitCards.Length == 0 && BankStorage.DebitCards.Length == 0))
+            {
+                do
+                {
+                    Clear();
+
+                    Output.ShowFunctions();
+
+                    bankFunctions.ChooseFunction();
+
+                    switch (BankFunctions.FunctionNumber)
+                    {
+                        case (int)BankFunctions.CardFunctions.AddMoney:
+
+                            Clear();
+
+                            bankFunctions.ChooseCard();
+
+                            Clear();
+
+                            bankFunctions.AddMoney();
+
+                            bankFunctions.ChooseSurgery();
+
+                            break;
+
+                        case (int)BankFunctions.CardFunctions.GetMoney:
+
+                            Clear();
+
+                            bankFunctions.ChooseCard();
+
+                            Clear();
+
+                            bankFunctions.GetMoney();
+
+                            bankFunctions.ChooseSurgery();
+
+                            break;
+
+                        case (int)BankFunctions.CardFunctions.ShowMoney:
+
+                            Clear();
+
+                            bankFunctions.ChooseCard();
+
+                            Clear();
+
+                            bankFunctions.ShowMoney();
+
+                            bankFunctions.ChooseSurgery();
+
+                            break;
+
+                        case (int)BankFunctions.CardFunctions.TransitMoney:
+
+                            Clear();
+
+                            bankFunctions.ChooseTypeTransitoin();
+
+                            Clear();
+
+                            bankFunctions.ChooseCard();
+
+                            if (BankFunctions.TypeTransition == (int)BankFunctions.TypeTransits.TransitMoney)
+                            {
+                                bankFunctions.TransitMoney();
+                            }
+                            else if (BankFunctions.TypeTransition == (int)BankFunctions.TypeTransits.TransitMoneyOhterAccount)
+                            {
+                                bankFunctions.TransitMoneyOhterAccount();
+                            }
+
+                            bankFunctions.ChooseSurgery();
+
+                            break;
+
+                        default:
+
+                            Clear();
+
+                            WriteLine("We don't have this operatioin,try again.");
+
+                            bankFunctions.ChooseSurgery();
+
+                            break;
+                    }
+                }
+                while (BankFunctions.SurgeryConditon == (int)BankFunctions.SurgeryConditons.Yes);
+
+                Clear();
+            }
         }
     }
 }

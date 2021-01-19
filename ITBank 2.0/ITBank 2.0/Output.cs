@@ -39,5 +39,11 @@ namespace ITBank_2._0
              "\n2)Kredit.");
         }
 
+        public static void ShowOptions()
+        {
+            WriteLine("Do you want create card?\n" +
+                      "1)Enter\n" +
+                      "2)Espace");
+        }
     }
 }
