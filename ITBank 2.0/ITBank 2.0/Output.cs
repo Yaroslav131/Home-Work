@@ -39,7 +39,7 @@ namespace ITBank_2._0
              "\n2)Kredit.");
         }
 
-        public static void ShowOptions()
+        public static void ShowCreateOptions()
         {
             WriteLine("Do you want create card?\n" +
                       "1)Enter\n" +

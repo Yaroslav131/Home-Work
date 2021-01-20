@@ -33,6 +33,8 @@ namespace ITBank_2._0
         }
 
         private const int ConvertToArrayStyle = 1;
+        private const int MaxLenghtPassword = 20;
+        private const int MinIdValue = 1;
 
         private long numbersAccounts;
 
@@ -117,7 +119,7 @@ namespace ITBank_2._0
                             Output.InformMistake();
                         }
 
-                        if (idCard > BankStorage.AccountsScore.Length || idCard < 1)
+                        if (idCard > BankStorage.AccountsScore.Length || idCard < MinIdValue)
                         {
                             Output.InformMistake();
 
@@ -125,8 +127,8 @@ namespace ITBank_2._0
                         }
                         else
                         {
-                            BankStorage.DebitCards[counter] = idCard - 1;
-                            BankStorage.AccountsScore[idCard - 1] = 0;
+                            BankStorage.DebitCards[counter] = idCard - ConvertToArrayStyle;
+                            BankStorage.AccountsScore[idCard - ConvertToArrayStyle] = 0;
                             wrongLinkCard = false;
                         }
                     }
@@ -167,7 +169,7 @@ namespace ITBank_2._0
                             Output.InformMistake();
                         }
 
-                        if (idCard > BankStorage.AccountsScore.Length || idCard < 1)
+                        if (idCard > BankStorage.AccountsScore.Length || idCard < MinIdValue)
                         {
                             Output.InformMistake();
 
@@ -175,8 +177,8 @@ namespace ITBank_2._0
                         }
                         else
                         {
-                            BankStorage.CreditCards[counter] = idCard - 1;
-                            BankStorage.AccountsScore[idCard - 1] = 0;
+                            BankStorage.CreditCards[counter] = idCard - ConvertToArrayStyle;
+                            BankStorage.AccountsScore[idCard - ConvertToArrayStyle] = 0;
                             wrongLinkCard = false;
                         }
                     }
@@ -391,12 +393,12 @@ namespace ITBank_2._0
                     }
                 }
 
-                if (arrayRecipientNumber.Length < 20 || arrayRecipientNumber.Length > 20)
+                if (arrayRecipientNumber.Length < MaxLenghtPassword || arrayRecipientNumber.Length > MaxLenghtPassword)
                 {
                     Output.InformMistake();
                 }
             }
-            while (arrayRecipientNumber.Length < 20 || arrayRecipientNumber.Length > 20);
+            while (arrayRecipientNumber.Length < MaxLenghtPassword || arrayRecipientNumber.Length > MaxLenghtPassword );
 
             Clear();
 
@@ -582,8 +584,7 @@ namespace ITBank_2._0
 
         public void RecreateCard()
         {
-
-            Output.ShowOptions();
+            Output.ShowCreateOptions();
 
             do
             {
@@ -624,7 +625,7 @@ namespace ITBank_2._0
                         {
                             Clear();
 
-                            WriteLine("You don't have  card of this type ");
+                            WriteLine("You don't have card this type ");
 
                             unknownKey = true;
                         }
@@ -639,7 +640,7 @@ namespace ITBank_2._0
                         {
                             Clear();
 
-                            WriteLine("You don't have  card of this type ");
+                            WriteLine("You don't have  card this type ");
 
                             unknownKey = true;
                         }
