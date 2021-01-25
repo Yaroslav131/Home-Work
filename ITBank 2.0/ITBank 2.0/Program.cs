@@ -75,7 +75,7 @@ namespace ITBank_2._0
                             {
                                 bank.SetSum();
 
-                                if ( !Bank.NegativeBallance)
+                                if (!Bank.NegativeBallance)
                                 {
                                     card.GetMoney();
                                 }
@@ -114,7 +114,7 @@ namespace ITBank_2._0
 
                             Clear();
 
-                            if (Bank.RightAccount && !Bank.Credit )
+                            if (Bank.RightAccount && !Bank.Credit)
                             {
                                 bank.SetSum();
 
@@ -127,7 +127,7 @@ namespace ITBank_2._0
                                     if (!Bank.WrongAccount)
                                     {
                                         card.TransitMoney();
-                                    }                                    
+                                    }
                                 }
                                 else if (Bank.TypeTransition == (int)Bank.TypeTransits.TransitMoneyOhterAccount && !Bank.NegativeBallance)
                                 {

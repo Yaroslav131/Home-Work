@@ -1,5 +1,5 @@
-﻿using static System.Console;
-using System.Threading;
+﻿using System.Threading;
+using static System.Console;
 
 namespace ITBank_2._0
 {

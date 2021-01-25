@@ -395,7 +395,7 @@ namespace ITBank_2._0
                 Output.InformMistake();
             }
 
-            if (FunctionNumber== (int)CardFunctions.GetMoney|| FunctionNumber == (int)CardFunctions.TransitMoney)
+            if (FunctionNumber == (int)CardFunctions.GetMoney || FunctionNumber == (int)CardFunctions.TransitMoney)
             {
                 CheckNegativeBallance();
             }
