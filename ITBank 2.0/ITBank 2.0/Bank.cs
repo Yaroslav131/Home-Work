@@ -33,9 +33,9 @@ namespace ITBank_2._0
 
         private long numbersAccounts;
         private long numbersCards;
-        private int typeCard;
-        private int idCard;
-        private bool wrongLinkCard;
+        private int typeOfCard;
+        private int idOfCard;
+        private bool wrongLinkOfCard;
         private bool unknownKey;
 
         public static bool NegativeBallance { get; set; }
@@ -67,7 +67,7 @@ namespace ITBank_2._0
             WrongAccount = false;
         }
 
-        public void CreatAccounts()
+        public void CreateAccounts()
         {
             WriteLine("How mach do you want accounts?");
 
@@ -98,7 +98,7 @@ namespace ITBank_2._0
 
                 if (numbersCards == 0)
                 {
-                    wrongLinkCard = false;
+                    wrongLinkOfCard = false;
                 }
                 else
                 {
@@ -107,29 +107,29 @@ namespace ITBank_2._0
 
                         WriteLine("Choose account for debit card. ");
 
-                        while (!int.TryParse(ReadLine(), out idCard) || idCard <= 0)
+                        while (!int.TryParse(ReadLine(), out idOfCard) || idOfCard <= 0)
                         {
                             Output.InformMistake();
                         }
 
-                        idCard -= ConvertToArrayStyle;
+                        idOfCard -= ConvertToArrayStyle;
 
-                        if (idCard > BankStorage.AccountsScore.Length || idCard < 0)
+                        if (idOfCard > BankStorage.AccountsScore.Length || idOfCard < 0)
                         {
                             Output.InformMistake();
 
-                            wrongLinkCard = true;
+                            wrongLinkOfCard = true;
                         }
                         else
                         {
-                            BankStorage.DebitCards[counter] = idCard;
-                            BankStorage.AccountsScore[idCard] = 0;
-                            wrongLinkCard = false;
+                            BankStorage.DebitCards[counter] = idOfCard;
+                            BankStorage.AccountsScore[idOfCard] = 0;
+                            wrongLinkOfCard = false;
                         }
                     }
                 }
             }
-            while (wrongLinkCard);
+            while (wrongLinkOfCard);
         }
 
         public void LinkCreditCards()
@@ -149,7 +149,7 @@ namespace ITBank_2._0
 
                 if (numbersCards == 0)
                 {
-                    wrongLinkCard = false;
+                    wrongLinkOfCard = false;
                 }
                 else
                 {
@@ -157,36 +157,36 @@ namespace ITBank_2._0
                     {
                         WriteLine("Choose  account for credit card. ");
 
-                        while (!int.TryParse(ReadLine(), out idCard) || idCard <= 0)
+                        while (!int.TryParse(ReadLine(), out idOfCard) || idOfCard <= 0)
                         {
                             Clear();
 
                             Output.InformMistake();
                         }
 
-                        idCard -= ConvertToArrayStyle;
+                        idOfCard -= ConvertToArrayStyle;
 
-                        if (idCard > BankStorage.AccountsScore.Length || idCard < 0)
+                        if (idOfCard > BankStorage.AccountsScore.Length || idOfCard < 0)
                         {
                             Output.InformMistake();
 
-                            wrongLinkCard = true;
+                            wrongLinkOfCard = true;
                         }
                         else
                         {
-                            BankStorage.CreditCards[counter] = idCard;
-                            BankStorage.AccountsScore[idCard] = 0;
-                            wrongLinkCard = false;
+                            BankStorage.CreditCards[counter] = idOfCard;
+                            BankStorage.AccountsScore[idOfCard] = 0;
+                            wrongLinkOfCard = false;
                         }
                     }
 
-                    if (wrongLinkCard == true)
+                    if (wrongLinkOfCard == true)
                     {
                         WriteLine("We have problem with registration,try again.");
                     }
                 }
             }
-            while (wrongLinkCard);
+            while (wrongLinkOfCard);
         }
 
         public void ChooseFunction()
@@ -319,7 +319,7 @@ namespace ITBank_2._0
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
-                        typeCard = (int)TypeCards.Debit;
+                        typeOfCard = (int)TypeCards.Debit;
                         unknownKey = false;
 
                         if (BankStorage.DebitCards.Length == 0)
@@ -334,7 +334,7 @@ namespace ITBank_2._0
 
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
-                        typeCard = (int)TypeCards.Credit;
+                        typeOfCard = (int)TypeCards.Credit;
                         unknownKey = false;
 
                         if (BankStorage.CreditCards.Length == 0)
@@ -441,11 +441,11 @@ namespace ITBank_2._0
 
         public void CheckTypeCard()
         {
-            if (typeCard == (int)TypeCards.Debit)
+            if (typeOfCard == (int)TypeCards.Debit)
             {
                 SomeCards = BankStorage.DebitCards;
             }
-            else if (typeCard == (int)TypeCards.Credit)
+            else if (typeOfCard == (int)TypeCards.Credit)
             {
                 SomeCards = BankStorage.CreditCards;
             }
