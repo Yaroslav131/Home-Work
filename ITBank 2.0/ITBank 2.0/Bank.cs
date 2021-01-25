@@ -46,7 +46,7 @@ namespace ITBank_2._0
         public static int SurgeryConditon { get; set; }
         public static int FunctionNumber { get; set; }
         public static bool RebuildConditon { get; set; }
-        public static int[] someCards { get; set; }
+        public static int[] SomeCards { get; set; }
 
         internal static double money;
         internal static long accountForTransit;
@@ -443,11 +443,11 @@ namespace ITBank_2._0
         {
             if (typeCard == (int)TypeCards.Debit)
             {
-                someCards = BankStorage.DebitCards;
+                SomeCards = BankStorage.DebitCards;
             }
             else if (typeCard == (int)TypeCards.Credit)
             {
-                someCards = BankStorage.CreditCards;
+                SomeCards = BankStorage.CreditCards;
             }
         }
 
@@ -470,7 +470,7 @@ namespace ITBank_2._0
 
         public void CheckRightAccount()
         {
-            for (int counter = 0; counter < someCards.Length; counter++)
+            for (int counter = 0; counter < SomeCards.Length; counter++)
             {
                 RightAccount = numberCard == counter;
 
@@ -488,11 +488,11 @@ namespace ITBank_2._0
 
         public void CheckNumberAccountForTrans()
         {
-            if (someCards == BankStorage.CreditCards)
+            if (SomeCards == BankStorage.CreditCards)
             {
-                for (int counter = 0; counter < someCards.Length; counter++)
+                for (int counter = 0; counter < SomeCards.Length; counter++)
                 {
-                    if (accountForTransit != someCards[counter] - ConvertToArrayStyle)
+                    if (accountForTransit != SomeCards[counter] - ConvertToArrayStyle)
                     {
                         WrongAccount = true;
 
@@ -504,7 +504,7 @@ namespace ITBank_2._0
 
         public void CheckNegativeBallance()
         {
-            if (Bank.money > BankStorage.AccountsScore[Bank.someCards[Bank.numberCard]] && Bank.someCards == BankStorage.DebitCards)
+            if (Bank.money > BankStorage.AccountsScore[Bank.SomeCards[Bank.numberCard]] && Bank.SomeCards == BankStorage.DebitCards)
             {
                 NegativeBallance = true;
 

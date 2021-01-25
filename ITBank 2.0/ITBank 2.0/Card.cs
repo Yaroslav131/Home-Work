@@ -6,14 +6,14 @@ namespace ITBank_2._0
     {
         public void AddMoney()
         {
-            BankStorage.AccountsScore[Bank.someCards[Bank.numberCard]] += Bank.money;
+            BankStorage.AccountsScore[Bank.SomeCards[Bank.numberCard]] += Bank.money;
 
             Output.LoadingInform();
         }
 
         public void GetMoney()
         {
-            BankStorage.AccountsScore[Bank.someCards[Bank.numberCard]] -= Bank.money;
+            BankStorage.AccountsScore[Bank.SomeCards[Bank.numberCard]] -= Bank.money;
 
             Output.LoadingInform();
         }
@@ -22,7 +22,7 @@ namespace ITBank_2._0
         {
             Output.LoadingInform();
 
-            WriteLine($"In Your accont { BankStorage.AccountsScore[Bank.someCards[Bank.numberCard]] }$.");
+            WriteLine($"In Your accont { BankStorage.AccountsScore[Bank.SomeCards[Bank.numberCard]] }$.");
         }
 
         public void TransitMoney()
@@ -35,7 +35,7 @@ namespace ITBank_2._0
 
         public void TransitMoneyOhterAccount()
         {
-            BankStorage.AccountsScore[Bank.someCards[Bank.numberCard]] -= Bank.money;
+            BankStorage.AccountsScore[Bank.SomeCards[Bank.numberCard]] -= Bank.money;
 
             Output.LoadingInform();
         }
