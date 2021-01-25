@@ -1,4 +1,5 @@
 ﻿using static System.Console;
+using System.Threading;
 
 namespace ITBank_2._0
 {
@@ -44,6 +45,17 @@ namespace ITBank_2._0
             WriteLine("Do you want create card?\n" +
                       "1)Enter\n" +
                       "2)Espace");
+        }
+
+        public static void LoadingInform()
+        {
+            WriteLine("Loading...");
+
+            Thread.Sleep(2500);
+
+            Clear();
+
+            WriteLine("Operation was a success.");
         }
     }
 }
