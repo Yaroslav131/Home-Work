@@ -10,11 +10,11 @@ namespace ITBank_2._0
             WriteLine("You have mistake, write correctly.");
         }
 
-        public static void ShowFunctions()
+        public static void ShowCardFunctions()
         {
             WriteLine("What you want to do?" +
-                     "\n1)Add money to acount." +
-                     "\n2)Get Money from acount." +
+                     "\n1)Add money to account." +
+                     "\n2)Get Money from account." +
                      "\n3)Look score." +
                      "\n4)Transition money.");
         }
@@ -26,21 +26,21 @@ namespace ITBank_2._0
                 "\n2)Other accounts.");
         }
 
-        public static void ShowSurgery()
+        public static void ShowNewOperationOptions()
         {
             WriteLine("Would you like to do another surgery?" +
                "\n1)Enter." +
                "\n2)Esc.");
         }
 
-        public static void ShowTypeCard()
+        public static void ShowTypeOfCard()
         {
             WriteLine("Choose card " +
              "\n1)Debit." +
              "\n2)Kredit.");
         }
 
-        public static void ShowCreateOptions()
+        public static void ShowReconnectionOptions()
         {
             WriteLine("Do you want create card?\n" +
                       "1)Enter\n" +

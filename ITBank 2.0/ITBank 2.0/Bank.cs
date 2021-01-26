@@ -19,34 +19,36 @@ namespace ITBank_2._0
             Credit
         }
 
-        public enum TypeTransits
+        public enum TypeTransitions
         {
             TransitMoney = 1,
             TransitMoneyOhterAccount
         }
 
-        public enum SurgeryConditons
+        public enum NewOperationOptions
         {
             Yes = 1,
             No
         }
 
-        private long numbersAccounts;
-        private long numbersCards;
+        private long numberOfAccounts;
+        private long numberOfCards;
         private int typeOfCard;
-        private int idOfCard;
-        private bool wrongLinkOfCard;
+        private int positionInCardArray;
+        private bool wrongСonnectionOfCard;
         private bool unknownKey;
+        private int counter;
+        private int counter2;
 
         public static bool NegativeBallance { get; set; }
-        public static bool WrongAccount { get; set; }
-        public static bool RightAccount { get; set; }
+        public static bool WrongNumberOfAccount { get; set; }
+        public static bool RightNumberOfAccount { get; set; }
         public static bool Credit { get; set; }
-        public static int TypeTransition { get; set; }
-        public static int SurgeryConditon { get; set; }
-        public static int FunctionNumber { get; set; }
-        public static bool RebuildConditon { get; set; }
-        public static int[] SomeCards { get; set; }
+        public static int TypeOfTransition { get; set; }
+        public static int NumberOfNewOperationOptions { get; set; }
+        public static int NumberOfCardFunction { get; set; }
+        public static bool ReconnectionCard { get; set; }
+        public static int[] SomeTypeOfCards { get; set; }
 
         internal static double money;
         internal static long accountForTransit;
@@ -63,161 +65,142 @@ namespace ITBank_2._0
 
         public Bank()
         {
-            RightAccount = false;
-            WrongAccount = false;
+            RightNumberOfAccount = false;
+            WrongNumberOfAccount = false;
         }
 
         public void CreateAccounts()
         {
             WriteLine("How mach do you want accounts?");
 
-            while (!long.TryParse(ReadLine(), out numbersAccounts) || numbersAccounts <= 0)
+            while (!long.TryParse(ReadLine(), out numberOfAccounts) || numberOfAccounts <= 0)
             {
                 Clear();
 
                 Output.InformMistake();
             }
 
-            BankStorage.AccountsScore = new double[numbersAccounts];
+            BankStorage.AccountsScore = new double[numberOfAccounts];
         }
 
-        public void LinkDebitCards()
+        public void LinkCards()
         {
-            do
+            for (counter = 1; counter <= Enum.GetNames(typeof(TypeCards)).Length; counter++)
             {
-                WriteLine("Choose how mach you want have debit cards. ");
-
-                while (!long.TryParse(ReadLine(), out numbersCards))
+                do
                 {
-                    Clear();
-
-                    Output.InformMistake();
-                }
-
-                BankStorage.DebitCards = new int[numbersCards];
-
-                if (numbersCards == 0)
-                {
-                    wrongLinkOfCard = false;
-                }
-                else
-                {
-                    for (int counter = 0; counter < numbersCards; counter++)
+                    if (counter == (int)TypeCards.Debit)
                     {
+                        WriteLine("Choose how mach you want have debit card. ");
+                    }
+                    else if (counter == (int)TypeCards.Credit)
+                    {
+                        WriteLine("Choose how mach you want have credit card. ");
+                    }
 
-                        WriteLine("Choose account for debit card. ");
+                    while (!long.TryParse(ReadLine(), out numberOfCards))
+                    {
+                        Clear();
 
-                        while (!int.TryParse(ReadLine(), out idOfCard) || idOfCard <= 0)
+                        Output.InformMistake();
+                    }
+
+                    if (counter == (int)TypeCards.Debit)
+                    {
+                        BankStorage.DebitCards = new int[numberOfCards];
+                    }
+                    else if (counter == (int)TypeCards.Credit)
+                    {
+                        BankStorage.CreditCards = new int[numberOfCards];
+                    }
+
+                    if (numberOfCards == 0)
+                    {
+                        wrongСonnectionOfCard = false;
+                    }
+                    else
+                    {
+                        for (counter2 = 0; counter2 < numberOfCards; counter2++)
                         {
-                            Output.InformMistake();
+                            if (counter == (int)TypeCards.Debit)
+                            {
+                                WriteLine("Choose account for debit card.");
+                            }
+                            else if (counter == (int)TypeCards.Credit)
+                            {
+                                WriteLine("Choose account for credit card.");
+                            }
+
+                            while (!int.TryParse(ReadLine(), out positionInCardArray) || positionInCardArray <= 0)
+                            {
+                                Clear();
+
+                                Output.InformMistake();
+                            }
+
+                            positionInCardArray -= ConvertToArrayStyle;
+
+                            if (positionInCardArray > BankStorage.AccountsScore.Length || positionInCardArray < 0)
+                            {
+                                Output.InformMistake();
+
+                                wrongСonnectionOfCard = true;
+                            }
+                            else
+                            {
+                                if (counter == (int)TypeCards.Debit)
+                                {
+                                    BankStorage.DebitCards[counter2] = positionInCardArray;
+                                }
+                                else if (counter == (int)TypeCards.Credit)
+                                {
+                                    BankStorage.CreditCards[counter2] = positionInCardArray;
+                                }
+
+                                BankStorage.AccountsScore[positionInCardArray] = 0;
+                                wrongСonnectionOfCard = false;
+                            }
                         }
 
-                        idOfCard -= ConvertToArrayStyle;
-
-                        if (idOfCard > BankStorage.AccountsScore.Length || idOfCard < 0)
+                        if (wrongСonnectionOfCard == true)
                         {
-                            Output.InformMistake();
-
-                            wrongLinkOfCard = true;
-                        }
-                        else
-                        {
-                            BankStorage.DebitCards[counter] = idOfCard;
-                            BankStorage.AccountsScore[idOfCard] = 0;
-                            wrongLinkOfCard = false;
+                            WriteLine("We have problem with registration,try again.");
                         }
                     }
                 }
+                while (wrongСonnectionOfCard);
             }
-            while (wrongLinkOfCard);
         }
 
-        public void LinkCreditCards()
+        public void ChooseCardFunction()
         {
             do
             {
-                WriteLine("Choose how mach you want have credit card. ");
-
-                while (!long.TryParse(ReadLine(), out numbersCards))
-                {
-                    Clear();
-
-                    Output.InformMistake();
-                }
-
-                BankStorage.CreditCards = new int[numbersCards];
-
-                if (numbersCards == 0)
-                {
-                    wrongLinkOfCard = false;
-                }
-                else
-                {
-                    for (int counter = 0; counter < numbersCards; counter++)
-                    {
-                        WriteLine("Choose  account for credit card. ");
-
-                        while (!int.TryParse(ReadLine(), out idOfCard) || idOfCard <= 0)
-                        {
-                            Clear();
-
-                            Output.InformMistake();
-                        }
-
-                        idOfCard -= ConvertToArrayStyle;
-
-                        if (idOfCard > BankStorage.AccountsScore.Length || idOfCard < 0)
-                        {
-                            Output.InformMistake();
-
-                            wrongLinkOfCard = true;
-                        }
-                        else
-                        {
-                            BankStorage.CreditCards[counter] = idOfCard;
-                            BankStorage.AccountsScore[idOfCard] = 0;
-                            wrongLinkOfCard = false;
-                        }
-                    }
-
-                    if (wrongLinkOfCard == true)
-                    {
-                        WriteLine("We have problem with registration,try again.");
-                    }
-                }
-            }
-            while (wrongLinkOfCard);
-        }
-
-        public void ChooseFunction()
-        {
-            do
-            {
-                Output.ShowFunctions();
+                Output.ShowCardFunctions();
 
                 switch (ReadKey().Key)
                 {
                     case ConsoleKey.NumPad1:
                     case ConsoleKey.D1:
-                        FunctionNumber = (int)CardFunctions.AddMoney;
+                        NumberOfCardFunction = (int)CardFunctions.AddMoney;
                         unknownKey = false;
                         break;
 
                     case ConsoleKey.NumPad2:
                     case ConsoleKey.D2:
-                        FunctionNumber = (int)CardFunctions.GetMoney;
+                        NumberOfCardFunction = (int)CardFunctions.GetMoney;
                         unknownKey = false;
                         break;
 
                     case ConsoleKey.NumPad3:
                     case ConsoleKey.D3:
-                        FunctionNumber = (int)CardFunctions.ShowMoney;
+                        NumberOfCardFunction = (int)CardFunctions.ShowMoney;
                         unknownKey = false;
                         break;
 
                     case ConsoleKey.NumPad4:
                     case ConsoleKey.D4:
-                        FunctionNumber = (int)CardFunctions.TransitMoney;
+                        NumberOfCardFunction = (int)CardFunctions.TransitMoney;
                         unknownKey = false;
                         break;
 
@@ -239,13 +222,13 @@ namespace ITBank_2._0
                 {
                     case ConsoleKey.NumPad1:
                     case ConsoleKey.D1:
-                        TypeTransition = (int)TypeTransits.TransitMoney;
+                        TypeOfTransition = (int)TypeTransitions.TransitMoney;
                         unknownKey = false;
                         break;
 
                     case ConsoleKey.NumPad2:
                     case ConsoleKey.D2:
-                        TypeTransition = (int)TypeTransits.TransitMoneyOhterAccount;
+                        TypeOfTransition = (int)TypeTransitions.TransitMoneyOhterAccount;
                         unknownKey = false;
                         break;
 
@@ -257,21 +240,21 @@ namespace ITBank_2._0
             while (unknownKey);
         }
 
-        public void ChooseSurgery()
+        public void StartNewOperation()
         {
-            Output.ShowSurgery();
+            Output.ShowNewOperationOptions();
 
             do
             {
                 switch (ReadKey().Key)
                 {
                     case ConsoleKey.Enter:
-                        SurgeryConditon = (int)SurgeryConditons.Yes;
+                        NumberOfNewOperationOptions = (int)NewOperationOptions.Yes;
                         unknownKey = false;
                         break;
 
                     case ConsoleKey.Escape:
-                        SurgeryConditon = (int)SurgeryConditons.No;
+                        NumberOfNewOperationOptions = (int)NewOperationOptions.No;
                         unknownKey = false;
                         break;
 
@@ -285,19 +268,19 @@ namespace ITBank_2._0
 
         public void RecreateCard()
         {
-            Output.ShowCreateOptions();
+            Output.ShowReconnectionOptions();
 
             do
             {
                 switch (ReadKey().Key)
                 {
                     case ConsoleKey.Enter:
-                        RebuildConditon = true;
+                        ReconnectionCard = true;
                         unknownKey = false;
                         break;
 
                     case ConsoleKey.Escape:
-                        RebuildConditon = false;
+                        ReconnectionCard = false;
                         unknownKey = false;
                         break;
 
@@ -313,7 +296,7 @@ namespace ITBank_2._0
         {
             do
             {
-                Output.ShowTypeCard();
+                Output.ShowTypeOfCard();
 
                 switch (ReadKey().Key)
                 {
@@ -395,7 +378,7 @@ namespace ITBank_2._0
                 Output.InformMistake();
             }
 
-            if (FunctionNumber == (int)CardFunctions.GetMoney || FunctionNumber == (int)CardFunctions.TransitMoney)
+            if (NumberOfCardFunction == (int)CardFunctions.GetMoney || NumberOfCardFunction == (int)CardFunctions.TransitMoney)
             {
                 CheckNegativeBallance();
             }
@@ -443,11 +426,11 @@ namespace ITBank_2._0
         {
             if (typeOfCard == (int)TypeCards.Debit)
             {
-                SomeCards = BankStorage.DebitCards;
+                SomeTypeOfCards = BankStorage.DebitCards;
             }
             else if (typeOfCard == (int)TypeCards.Credit)
             {
-                SomeCards = BankStorage.CreditCards;
+                SomeTypeOfCards = BankStorage.CreditCards;
             }
         }
 
@@ -470,17 +453,17 @@ namespace ITBank_2._0
 
         public void CheckRightAccount()
         {
-            for (int counter = 0; counter < SomeCards.Length; counter++)
+            for (int counter = 0; counter < SomeTypeOfCards.Length; counter++)
             {
-                RightAccount = numberCard == counter;
+                RightNumberOfAccount = numberCard == counter;
 
-                if (RightAccount == true)
+                if (RightNumberOfAccount == true)
                 {
                     break;
                 }
             }
 
-            if (RightAccount == false)
+            if (RightNumberOfAccount == false)
             {
                 WriteLine("Wrong number of card");
             }
@@ -488,13 +471,13 @@ namespace ITBank_2._0
 
         public void CheckNumberAccountForTrans()
         {
-            if (SomeCards == BankStorage.CreditCards)
+            if (SomeTypeOfCards == BankStorage.CreditCards)
             {
-                for (int counter = 0; counter < SomeCards.Length; counter++)
+                for (int counter = 0; counter < SomeTypeOfCards.Length; counter++)
                 {
-                    if (accountForTransit != SomeCards[counter] - ConvertToArrayStyle)
+                    if (accountForTransit != SomeTypeOfCards[counter] - ConvertToArrayStyle)
                     {
-                        WrongAccount = true;
+                        WrongNumberOfAccount = true;
 
                         Output.InformMistake();
                     }
@@ -504,7 +487,7 @@ namespace ITBank_2._0
 
         public void CheckNegativeBallance()
         {
-            if (Bank.money > BankStorage.AccountsScore[Bank.SomeCards[Bank.numberCard]] && Bank.SomeCards == BankStorage.DebitCards)
+            if (Bank.money > BankStorage.AccountsScore[Bank.SomeTypeOfCards[Bank.numberCard]] && Bank.SomeTypeOfCards == BankStorage.DebitCards)
             {
                 NegativeBallance = true;
 

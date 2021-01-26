@@ -11,17 +11,13 @@ namespace ITBank_2._0
 
             WriteLine("Wellcom to the ITBank.");
 
-            bank.CreatAccounts();
+            bank.CreateAccounts();
 
             do
             {
                 Clear();
 
-                bank.LinkDebitCards();
-
-                Clear();
-
-                bank.LinkCreditCards();
+                bank.LinkCards();
 
                 if (BankStorage.DebitCards.Length == 0 && BankStorage.CreditCards.Length == 0)
                 {
@@ -30,7 +26,7 @@ namespace ITBank_2._0
                     bank.RecreateCard();
                 }
             }
-            while (Bank.RebuildConditon);
+            while (Bank.ReconnectionCard);
 
             if (!(BankStorage.DebitCards.Length == 0 && BankStorage.CreditCards.Length == 0))
             {
@@ -38,9 +34,9 @@ namespace ITBank_2._0
                 {
                     Clear();
 
-                    bank.ChooseFunction();
+                    bank.ChooseCardFunction();
 
-                    switch (Bank.FunctionNumber)
+                    switch (Bank.NumberOfCardFunction)
                     {
                         case (int)Bank.CardFunctions.AddMoney:
 
@@ -54,12 +50,10 @@ namespace ITBank_2._0
 
                             Clear();
 
-                            if (Bank.RightAccount)
+                            if (Bank.RightNumberOfAccount)
                             {
                                 card.AddMoney();
                             }
-
-                            bank.ChooseSurgery();
 
                             break;
 
@@ -71,7 +65,7 @@ namespace ITBank_2._0
 
                             Clear();
 
-                            if (Bank.RightAccount && !Bank.Credit && !Bank.NegativeBallance)
+                            if (Bank.RightNumberOfAccount && !Bank.Credit)
                             {
                                 bank.SetSum();
 
@@ -80,8 +74,6 @@ namespace ITBank_2._0
                                     card.GetMoney();
                                 }
                             }
-
-                            bank.ChooseSurgery();
 
                             break;
 
@@ -93,12 +85,10 @@ namespace ITBank_2._0
 
                             Clear();
 
-                            if (Bank.RightAccount)
+                            if (Bank.RightNumberOfAccount)
                             {
                                 card.ShowMoney();
                             }
-
-                            bank.ChooseSurgery();
 
                             break;
 
@@ -114,22 +104,22 @@ namespace ITBank_2._0
 
                             Clear();
 
-                            if (Bank.RightAccount && !Bank.Credit)
+                            if (Bank.RightNumberOfAccount && !Bank.Credit)
                             {
                                 bank.SetSum();
 
-                                if (Bank.TypeTransition == (int)Bank.TypeTransits.TransitMoney && !Bank.NegativeBallance)
+                                if (Bank.TypeOfTransition == (int)Bank.TypeTransitions.TransitMoney && !Bank.NegativeBallance)
                                 {
                                     Clear();
 
                                     bank.ChooseAccountForTransit();
 
-                                    if (!Bank.WrongAccount)
+                                    if (!Bank.WrongNumberOfAccount)
                                     {
                                         card.TransitMoney();
                                     }
                                 }
-                                else if (Bank.TypeTransition == (int)Bank.TypeTransits.TransitMoneyOhterAccount && !Bank.NegativeBallance)
+                                else if (Bank.TypeOfTransition == (int)Bank.TypeTransitions.TransitMoneyOhterAccount && !Bank.NegativeBallance)
                                 {
                                     Clear();
 
@@ -139,8 +129,6 @@ namespace ITBank_2._0
                                 }
                             }
 
-                            bank.ChooseSurgery();
-
                             break;
 
                         default:
@@ -149,12 +137,12 @@ namespace ITBank_2._0
 
                             WriteLine("We don't have this operatioin,try again.");
 
-                            bank.ChooseSurgery();
-
                             break;
                     }
+
+                    bank.StartNewOperation();
                 }
-                while (Bank.SurgeryConditon == (int)Bank.SurgeryConditons.Yes);
+                while (Bank.NumberOfNewOperationOptions == (int)Bank.NewOperationOptions.Yes);
 
                 Clear();
             }
